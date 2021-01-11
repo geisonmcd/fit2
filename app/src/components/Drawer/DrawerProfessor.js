@@ -35,6 +35,7 @@ export default function DrawerProfessor({ state, navigation, descriptors, progre
   };
 
   useEffect(() => {
+    console.log(session);
     const list = session.customers.map(customer => ({
       key: customer.idCustomer,
       label: customer.name,

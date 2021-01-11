@@ -184,6 +184,11 @@ function DrawerMenu() {
 
 function RootStack() {
   return (
+    <View>
+      <Text>hey</Text>
+    </View>
+  )
+  return (
     <Stack.Navigator mode="modal">
       <Stack.Screen name="DrawerMenu" component={DrawerMenu} options={{ headerShown: false }} />
       {/* <Stack.Screen name="Modal" component={Modal} options={{ headerShown: false }} /> */}

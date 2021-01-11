@@ -14,15 +14,23 @@ export default function SignIn() {
   // const [username, setUsername] = useState('fernando.bernardino@gennera.com.br');
   // const [password, setPassword] = useState('12345678f');
 
-  // // Professor
-  // const [username, setUsername] = useState('fernandombernardino@gmail.com');
+  // Professor
+  const [username, setUsername] = useState('fernandombernardino@gmail.com');
+  const [password, setPassword] = useState('12345678');
+
+   // Aluno
+  // const [username, setUsername] = useState('geison.machado@gennera.com.br');
   // const [password, setPassword] = useState('12345678');
+
+  // Professor
+  // const [username, setUsername] = useState('');
+  // const [password, setPassword] = useState('');
 
   const { signIn } = useAuthContext();
 
   return (
     <View style={styles.container}>
-      <TextInput style={styles.textInput} placeholder={translate('Type your username')} placeholderTextColor="#fff" textContentType="username" autoCapitalize="none" value={username} onChangeText={setUsername} />
+      <TextInput style={styles.textInput} placeholder={translate('Type your e-mail')} placeholderTextColor="#fff" textContentType="username" autoCapitalize="none" value={username} onChangeText={setUsername} />
       <TextInput style={styles.textInput} placeholder={translate('Type your password')} placeholderTextColor="#fff" textContentType="password" autoCapitalize="none" value={password} onChangeText={setPassword} secureTextEntry />
       <Button style={styles.button} title={translate('Sign in')} onPress={() => signIn(username, password)} requestFeedback />
     </View>

@@ -9,7 +9,11 @@ import { version } from '../../../package';
 
 
 export default function Drawer(props) {
-  const { session, role, signOut } = useAuthContext();
+  let { session, role, signOut } = useAuthContext();
+  // session = { user: { name: 'geison', email: 'geisonmcd@gmail.com ', username: 'geisoka'}}
+  // const role = 'PROFESSOR'
+  console.log(session);
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>

@@ -16,7 +16,7 @@ backstage.interceptors.request.use(onRequestSuccess, onRequestError);
 backstage.interceptors.response.use(onResponseSuccess, onResponseError);
 
 // const classroom = axios.create({ baseURL: 'https://classroom2.gennera.com.br', timeout: 5000 });
-const classroom = axios.create({ baseURL: Platform.select({ ios: 'http://localhost:4800', android: 'http://10.0.2.2:4800' }), timeout: 5000 });
+const classroom = axios.create({ baseURL: Platform.select({ ios: 'http://localhost:4800', android: 'https://classroom2.gennera.com.br' }), timeout: 5000 });
 classroom.interceptors.request.use(onRequestSuccess, onRequestError);
 classroom.interceptors.response.use(onResponseSuccess, onResponseError);
 

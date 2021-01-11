@@ -7,6 +7,7 @@ async function authenticate(username, password) {
 
 async function getSession() {
   const response = await api.gennera.session();
+  console.log({response});
   return response.data;
 }
 

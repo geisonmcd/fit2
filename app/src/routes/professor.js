@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Pressable } from 'react-native';
+import { View, Pressable, Text } from 'react-native';
 import { useNavigation, useTheme } from '@react-navigation/native';
 import { createStackNavigator, TransitionPresets } from '@react-navigation/stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
@@ -33,15 +33,15 @@ const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 
 function getDefaultScreenOptions() {
-  const { system } = useTheme();
+  // const { system } = useTheme();
   return {
-    backgroundColor: system.background.primary,
+    backgroundColor: 'white',
     headerStyle: {
-      backgroundColor: system.background.primary,
+      backgroundColor: 'grey',
       elevation: 0,
     },
-    headerTintColor: system.label.primary,
-    borderColor: system.background.primary,
+    headerTintColor: 'black',
+    borderColor: 'black',
   };
 }
 
@@ -168,6 +168,7 @@ function IncidentsStack() {
 }
 
 function DrawerMenu() {
+ 
   return (
     <Drawer.Navigator initialRouteName="Diaries" drawerContent={(props) => <DrawerContent {...props} />}>
       <Drawer.Screen name="Diaries" component={DiariesStack} />
