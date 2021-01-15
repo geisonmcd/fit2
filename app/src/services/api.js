@@ -1,4 +1,4 @@
-import { backstage, classroom, locker } from '../configs/HTTP';
+import { backstage, classroom, locker, fitAxios } from '../configs/HTTP';
 
 function buildQueryString(filters) {
   return Object.keys(filters).map((f, i) => i === 0 ? `?${f}=${filters[f]}` : `${f}=${filters[f]}`).join('&') || '';
@@ -27,6 +27,12 @@ const api = {
       enrollments: {
         list: (idUser) => classroom.get(`/users/${idUser}/enrollments`, {})
       }
+    }
+  },
+  fit: {
+    timetables: {
+      save: (timetable) => fitAxios.post(`/timetables`, timetable),
+      list: () => fitAxios.get(`timetables`, {})
     }
   },
 

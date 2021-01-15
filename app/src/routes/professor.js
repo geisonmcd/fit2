@@ -170,7 +170,7 @@ function IncidentsStack() {
 function DrawerMenu() {
  
   return (
-    <Drawer.Navigator initialRouteName="Diaries" drawerContent={(props) => <DrawerContent {...props} />}>
+    <Drawer.Navigator initialRouteName="Incidents" drawerContent={(props) => <DrawerContent {...props} />}>
       <Drawer.Screen name="Diaries" component={DiariesStack} />
       <Drawer.Screen name="Calendar" component={CalendarStack} />
       <Drawer.Screen name="Timeline" component={TimelineStack} />

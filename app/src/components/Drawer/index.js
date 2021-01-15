@@ -12,7 +12,6 @@ export default function Drawer(props) {
   let { session, role, signOut } = useAuthContext();
   // session = { user: { name: 'geison', email: 'geisonmcd@gmail.com ', username: 'geisoka'}}
   // const role = 'PROFESSOR'
-  console.log(session);
 
   return (
     <View style={styles.container}>

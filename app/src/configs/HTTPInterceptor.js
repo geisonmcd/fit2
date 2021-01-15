@@ -19,6 +19,7 @@ export function onRequestError (error) {
 };
 
 export async function onResponseError (error) {
+  console.log(JSON.parse(JSON.stringify(error)));
   console.log('[ERROR - onResponseError]', `[${error.config.method}] ${error.message}\n${error.config.url}`);
   if (error.message === 'Request failed with status code 401') {
     await LocalStorage.remove('token');

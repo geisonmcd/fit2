@@ -1,0 +1,31 @@
+{
+  "name": "fit2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "dependencies": {
+    "app-module-path": "2.2.0",
+    "body-parser": "1.18.3",
+    "caseparser": "^1.0.2",
+    "express": "4.16.3",
+    "express-async-errors": "3.0.0",
+    "gulp": "3.9.1",
+    "lodash": "4.17.4",
+    "pg-promise": "^10.8.7",
+    "request": "2.83.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/geisonmcd/fit2.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/geisonmcd/fit2/issues"
+  },
+  "homepage": "https://github.com/geisonmcd/fit2#readme"
+}

@@ -20,8 +20,12 @@ const classroom = axios.create({ baseURL: Platform.select({ ios: 'http://localho
 classroom.interceptors.request.use(onRequestSuccess, onRequestError);
 classroom.interceptors.response.use(onResponseSuccess, onResponseError);
 
+const fitAxios = axios.create({ baseURL: Platform.select({ ios: 'http://192.168.0.3:5000', android: 'http://192.168.0.3:5000' }), timeout: 5000 });
+fitAxios.interceptors.request.use(onRequestSuccess, onRequestError);
+fitAxios.interceptors.response.use(onResponseSuccess, onResponseError);
+
 const locker = axios.create({ baseURL: 'https://files.gennera.com.br', timeout: 5000 });
 locker.interceptors.request.use(onRequestSuccess, onRequestError);
 locker.interceptors.response.use(onResponseSuccess, onResponseError);
 
-export { web, backstage, classroom, locker };
+export { web, backstage, classroom, locker, fitAxios };

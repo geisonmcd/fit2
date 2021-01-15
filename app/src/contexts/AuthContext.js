@@ -59,21 +59,13 @@ function AuthContextProvider({ children }) {
   }
 
   async function signIn(username, password) {
-    console.log('HASLKDFHAÇSDFHAÇSLDKJFASDLÇKJFADSLKÇJADSFLJKÇAFDSLÇKJADFSÇLKJAFSDKJLÇAFDSLKÇJAFDSÇLKJFADSÇLKJ');
     try {
-      console.log('tá entrando aqui');
       const token = await authService.authenticate(username, password);
-      console.log('tá passando o authenticate');
-      console.log(token);
       await LocalStorage.set('token', token);
-      console.log('ta passando o localstorage');
       const session = await loadSession();
-      console.log('ta passando o loadsession');
-      console.log(session);
       await setActiveRole(session.user.roles.length === 1 ? session.user.roles[0] : null);
       dispatch({ type: 'SIGN_IN', token });
     } catch (error) {
-      console.log('deu erro no login');
       console.log(error);
     }
   }

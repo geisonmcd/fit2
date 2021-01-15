@@ -35,7 +35,6 @@ export default function DrawerProfessor({ state, navigation, descriptors, progre
   };
 
   useEffect(() => {
-    console.log(session);
     const list = session.customers.map(customer => ({
       key: customer.idCustomer,
       label: customer.name,
@@ -93,7 +92,6 @@ export default function DrawerProfessor({ state, navigation, descriptors, progre
   useEffect(() => {
     async function filterDiaries(idAcademicCalendar, idCourse, diaries) {
       const filteredDiaries = diaries.filter(diary => diary.academicCalendar.idAcademicCalendar === idAcademicCalendar && diary.course.idCourse === idCourse);
-      console.log(JSON.stringify(filteredDiaries, null, 2));
       await onChangeDiaries(filteredDiaries);
     }
     if (idAcademicCalendar && idCourse && diaries) {
