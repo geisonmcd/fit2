@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Pressable, Modal, Text, StyleSheet, TextInput } from 'react-native';
+import { FlatList, View, Pressable, Modal, Text, StyleSheet, TextInput } from 'react-native';
 import { useNavigation, useTheme } from '@react-navigation/native';
 
 import { translate } from '../../../translate';
@@ -11,7 +11,7 @@ import { useAppContext } from '../../../contexts/AppContext';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 MaterialIcons.loadFont();
 
-export default function Timetables() {
+export default function Timetables({ navigation }) {
     const { } = useAuthContext();
     const { } = useAppContext();
     const [modalVisible, setModalVisible] = useState(false);
@@ -21,16 +21,16 @@ export default function Timetables() {
     const { system } = useTheme();
 
     useEffect(() => {
-
         let getTimetables = async function () {
             let timetables = await api.fit.timetables.list();
+            console.log('olha o que voltou');
+            console.log(timetables.data);
             setTimeTables(timetables.data)
         }
         getTimetables();
-    }, []);
+    }, [timeTableName]);
 
     async function addTimeTable() {
-        console.log('chegou aqui');
         await api.fit.timetables.save({ name: timeTableName });
         setModalVisible(false);
         setTimeTableName('');
@@ -57,24 +57,44 @@ export default function Timetables() {
                 smallTitle={translate('Diaries')}
                 noDataIcon="book"
                 noDataMessage={translate('There\'s no diary')}
-                data={timetables}
-                renderItem={renderItem}
             >
-                <Button style={styles.button} title={'Adicionar Quadro de Horário'} onPress={() => setModalVisible(true)} />
-                <Modal
-                    animationType="slide"
-                    transparent={false}
-                    visible={modalVisible}
-                >
-                    <View style={styles.centeredView}>
-                        <View style={styles.modalView}>
-                            <TextInput style={styles.textInput} placeholder={'Nome do Quadro de horário'} placeholderTextColor="#fff" textContentType="name" autoCapitalize="none" value={timeTableName} onChangeText={setTimeTableName} />
-                            <Button style={styles.button} title={'Fechar'} onPress={() => setModalVisible(false)} />
-                            <Button style={styles.button} title={'Adicionar Quadro de Horário'} onPress={() => addTimeTable()} />
+                <View style={{padding: 10}}>
+                    <Modal
+                        animationType="slide"
+                        transparent={false}
+                        visible={modalVisible}
+                    >
+                        <View style={styles.centeredView}>
+                            <View style={styles.modalView}>
+                                <TextInput style={styles.textInput} placeholder={'Nome do Quadro de horário'} placeholderTextColor="#fff" textContentType="name" autoCapitalize="none" value={timeTableName} onChangeText={setTimeTableName} />
+                                <View style={{ justifyContent: 'center', flexDirection: 'row'}}>
+                                    <Button style={[styles.button,{ marginRight: 10}]} title={'Fechar'} onPress={() => setModalVisible(false)} />
+                                    <Button style={styles.button} title={'Adicionar Quadro de Horário'} onPress={() => addTimeTable()} />
+                                </View>
+                            </View>
                         </View>
-                    </View>
-                </Modal>
-
+                    </Modal>
+                    <Button style={styles.button} title={'Adicionar Quadro de Horário'} onPress={() => setModalVisible(true)} />
+                    <FlatList
+                        keyExtractor={(item, index) => index.toString()}
+                        data={timetables}
+                        renderItem={renderItem}
+                        ListEmptyComponent={() => (
+                            <View style={{
+                                flexGrow: 1,
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                padding: 16,
+                                marginBottom: 60
+                            }}>
+                                <Text>Sem Dados</Text>
+                            </View>
+                        )}
+                        scrollEventThrottle={20}
+                        showsVerticalScrollIndicator={false}
+                        onEndReachedThreshold={0.3}
+                    />
+                </View>
             </Page>
         </View>
     );
@@ -116,7 +136,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         paddingRight: 16,
         paddingVertical: 12,
-        marginLeft: 16,
+        marginLeft: 5,
         borderBottomWidth: 0.5,
     },
     itemText: {

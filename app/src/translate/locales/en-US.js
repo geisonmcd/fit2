@@ -11,6 +11,7 @@ export default {
   'Free Assessments': 'Free Assessments',
   'Grades': 'Grades',
   'Timetables': 'Timetables',
+  'Timetable': 'Timetable',
   'Notices': 'Notices',
   'Password': 'Password',
   'Reports': 'Reports',

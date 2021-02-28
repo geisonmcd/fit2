@@ -9,6 +9,7 @@ import {
   Calendar,
   Timeline,
   Timetables,
+  Timetable,
   Diary,
   DiaryContents,
   DiaryCorrections,
@@ -157,13 +158,17 @@ function TimelineStack() {
 }
 
 function TimetablesStack() {
-  return (
-    <Stack.Navigator initialRouteName="Timetables" screenOptions={getDefaultScreenOptions()}>
-      <Stack.Screen name="Timetables" component={Timetables} options={({ route }) => ({
-        ...getDefaultOptions({ route }),
-        headerLeft: () => <BurgerButton />
-      })} />
-    </Stack.Navigator>
+    return (
+        <Stack.Navigator initialRouteName="Timetables" screenOptions={getDefaultScreenOptions()}>
+            <Stack.Screen name="Timetables" component={Timetables} options={({ route }) => ({
+                ...getDefaultOptions({ route }),
+                headerLeft: () => <BurgerButton />
+            })} />
+            <Stack.Screen name="Timetable" component={Timetable} options={({ route }) => ({
+                ...getDefaultOptions({ route }),
+                headerLeft: () => <BackButton />
+            })} />
+        </Stack.Navigator>
   );
 }
 
