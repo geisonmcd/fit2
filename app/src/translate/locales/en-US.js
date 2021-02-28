@@ -10,7 +10,7 @@ export default {
   'Exams': 'Exams',
   'Free Assessments': 'Free Assessments',
   'Grades': 'Grades',
-  'Incidents': 'Incidents',
+  'Timetables': 'Timetables',
   'Notices': 'Notices',
   'Password': 'Password',
   'Reports': 'Reports',

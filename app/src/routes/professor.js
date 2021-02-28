@@ -8,7 +8,7 @@ import {
   Diaries,
   Calendar,
   Timeline,
-  Incidents,
+  Timetables,
   Diary,
   DiaryContents,
   DiaryCorrections,
@@ -156,10 +156,10 @@ function TimelineStack() {
   );
 }
 
-function IncidentsStack() {
+function TimetablesStack() {
   return (
-    <Stack.Navigator initialRouteName="Incidents" screenOptions={getDefaultScreenOptions()}>
-      <Stack.Screen name="Incidents" component={Incidents} options={({ route }) => ({
+    <Stack.Navigator initialRouteName="Timetables" screenOptions={getDefaultScreenOptions()}>
+      <Stack.Screen name="Timetables" component={Timetables} options={({ route }) => ({
         ...getDefaultOptions({ route }),
         headerLeft: () => <BurgerButton />
       })} />
@@ -170,11 +170,11 @@ function IncidentsStack() {
 function DrawerMenu() {
  
   return (
-    <Drawer.Navigator initialRouteName="Incidents" drawerContent={(props) => <DrawerContent {...props} />}>
+    <Drawer.Navigator initialRouteName="Timetables" drawerContent={(props) => <DrawerContent {...props} />}>
+      <Drawer.Screen name="Timetables" component={TimetablesStack} />
       <Drawer.Screen name="Diaries" component={DiariesStack} />
       <Drawer.Screen name="Calendar" component={CalendarStack} />
       <Drawer.Screen name="Timeline" component={TimelineStack} />
-      <Drawer.Screen name="Incidents" component={IncidentsStack} />
     </Drawer.Navigator>
   );
 }
@@ -183,7 +183,6 @@ function RootStack() {
   return (
     <Stack.Navigator mode="modal">
       <Stack.Screen name="DrawerMenu" component={DrawerMenu} options={{ headerShown: false }} />
-      {/* <Stack.Screen name="Modal" component={Modal} options={{ headerShown: false }} /> */}
     </Stack.Navigator>
   );
 }

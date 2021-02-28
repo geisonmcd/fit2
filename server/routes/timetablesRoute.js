@@ -13,17 +13,4 @@ router.get('/', async function (req, res) {
     res.json(timetables);
 });
 
-// router.delete("/:idInstitution", async function (req, res) {
-//     const idInstitution = req.params.idInstitution;
-//     await institutionsService.deleteInstitution(idInstitution);
-//     res.end();
-// });
-
-// router.put('/:idInstitution', async function (req, res) {
-//     const idInstitution = req.params.idInstitution;
-//     const institution = req.body;
-//     await institutionsService.updateInstitution(idInstitution, institution);
-//     res.end();
-// });
-
 module.exports = router;

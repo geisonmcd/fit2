@@ -9,21 +9,11 @@ import Picker from '../Picker';
 import api from '../../services/api';
 FontAwesome.loadFont();
 
-export default function DrawerProfessor({ state, navigation, descriptors, progress }) {
+export default function DrawerManager({ state, navigation, descriptors, progress }) {
   const { idCustomer, idInstitution, idAcademicCalendar, idCourse, onChangeCustomer, onChangeInstitution, onChangeAcademicCalendar, onChangeCourse, onChangeDiaries } = useAppContext();
   const { session } = useAuthContext();
   const [customers, setCustomers] = useState([]);
-  // const [customers, setCustomers] = useState(session.customers.map(customer => ({
-  //   key: customer.idCustomer,
-  //   label: customer.name,
-  //   value: customer.idCustomer
-  // })));
   const [institutions, setInstitutions] = useState([]);
-  // const [institutions, setInstitutions] = useState(session.institutions.map(institution => ({
-  //   key: institution.idInstitution,
-  //   label: institution.name,
-  //   value: institution.idInstitution
-  // })));
   const [academicCalendars, setAcademicCalendars] = useState([]);
   const [courses, setCourses] = useState([]);
   const [diaries, setDiaries] = useState([]);
@@ -31,7 +21,7 @@ export default function DrawerProfessor({ state, navigation, descriptors, progre
     'Diaries': 'book',
     'Calendar': 'calendar',
     'Timeline': 'comments-o',
-    'Incidents': 'address-book',
+    'Timetables': 'clock-o',
   };
 
   useEffect(() => {
@@ -103,91 +93,9 @@ export default function DrawerProfessor({ state, navigation, descriptors, progre
     return [...new Map(list.map(item => [item[key], item])).values()];
   }
 
-  async function onChangeCustomerHandler(newValue) {
-    // if (newValue !== idCustomer) {
-      setInstitutions([]);
-      // setAcademicCalendars([]);
-      // setCourses([]);
-      // await onChangeInstitution(null);
-      await onChangeCustomer(newValue);
-      // await onChangeAcademicCalendar(null);
-      // await onChangeCourse(null);
-    // }
-  }
-
-  async function onChangeInstitutionHandler(newValue) {
-    // if (newValue !== idInstitution) {
-      setAcademicCalendars([]);
-      // setCourses([]);
-      // await onChangeAcademicCalendar(null);
-      await onChangeInstitution(newValue);
-      // await onChangeCourse(null);
-    // }
-  }
-
-  async function onChangeAcademicCalendarHandler(newValue) {
-    // if (newValue !== idAcademicCalendar) {
-      setCourses([]);
-      // await onChangeCourse(null);
-      await onChangeAcademicCalendar(newValue);
-    // }
-  }
-
-  async function onChangeCourseHandler(newValue) {
-    // if (newValue !== idCourse) {
-      await onChangeCourse(newValue);
-    // }
-  }
-
   return (
     <View style={{flex: 1}}>
-      <View style={{backgroundColor: '#eee', paddingHorizontal: 10, paddingTop: 0, marginBottom: 20}}>
-        <Picker
-          name={'customers'}
-          placeholder={translate('Select the customer')}
-          list={customers}
-          selected={idCustomer}
-          disabled={!customers.length}
-          // visible={customers.length > 1}
-          // visible={true}
-          doneText={translate('Select')}
-          onChange={(newValue) => onChangeCustomerHandler(newValue)}
-        />
-        <Picker
-          name={'institutions'}
-          placeholder={translate('Select the institution')}
-          list={institutions}
-          selected={idInstitution}
-          disabled={!institutions.length}
-          // visible={institutions.length > 1}
-          // visible={true}
-          doneText={translate('Select')}
-          onChange={(newValue) => onChangeInstitutionHandler(newValue)}
-        />
-        <Picker
-          name={'academicCalendars'}
-          placeholder={translate('Select the academic calendar')}
-          list={academicCalendars}
-          selected={idAcademicCalendar}
-          disabled={!academicCalendars.length}
-          // visible={academicCalendars.length > 1}
-          // visible={true}
-          doneText={translate('Select')}
-          onChange={(newValue) => onChangeAcademicCalendarHandler(newValue)}
-        />
-        <Picker
-          name={'courses'}
-          placeholder={translate('Select the course')}
-          list={courses}
-          selected={idCourse}
-          disabled={!courses.length}
-          // visible={courses.length > 1}
-          // visible={true}
-          doneText={translate('Select')}
-          onChange={(newValue) => onChangeCourseHandler(newValue)}
-        />
-      </View>
-      <Text style={{fontSize: 16, color: '#777', fontWeight: '200', marginHorizontal: 10, marginBottom: 6}}>Menu</Text>
+    <Text style={{fontSize: 16, color: '#777', fontWeight: '200', marginHorizontal: 10, marginBottom: 6}}>Menu</Text>
       <ScrollView style={{paddingHorizontal: 10}}>
         {state.routes.map(route => {
           return (

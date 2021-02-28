@@ -1,7 +1,7 @@
+import Timetables from './Timetables';
 import Diaries from './Diaries';
 import Calendar from './Calendar';
 import Timeline from './Timeline';
-import Incidents from './Incidents';
 import Diary from './Diary';
 import DiaryContents from './DiaryContents';
 import DiaryCorrections from './DiaryCorrections';
@@ -20,7 +20,7 @@ export {
   Diaries,
   Calendar,
   Timeline,
-  Incidents,
+  Timetables,
   Diary,
   DiaryContents,
   DiaryCorrections,

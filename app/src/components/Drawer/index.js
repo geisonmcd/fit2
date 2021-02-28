@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet, Platform } from 'react-native';
 import { useAuthContext } from '../../contexts/AuthContext';
-import DrawerProfessor from './DrawerProfessor';
+import DrawerManager from './DrawerManager';
 import DrawerStudent from './DrawerStudent';
 import Button from '../Button';
 import { translate } from '../../translate';
@@ -23,7 +23,7 @@ export default function Drawer(props) {
         </View>
       </View>
       <View style={styles.body}>
-        {role === 'STUDENT' ? <DrawerStudent {...props} /> : <DrawerProfessor {...props} />}
+        {role === 'STUDENT' ? <DrawerStudent {...props} /> : <DrawerManager {...props} />}
       </View>
       <View style={styles.footer}>
         <Button style={styles.signOutButton} title={translate('Sign out')} onPress={() => signOut()} />
