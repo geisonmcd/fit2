@@ -32,7 +32,12 @@ const api = {
   fit: {
     timetables: {
       save: (timetable) => fitAxios.post(`/timetables`, timetable),
-      list: () => fitAxios.get(`timetables`, {})
+      list: () => fitAxios.get(`timetables`, {}),
+      update: (idTimetable, timetable) => fitAxios.put(`/timetables/${idTimetable}`, timetable)
+    },
+    timetableSlot: {
+        save: (idTimetable, timetableSlot) => fitAxios.post(`/timetables/${idTimetable}`, timetableSlot),
+        delete: (idTimetable, idTimetableSlot) => fitAxios.delete(`/timetables/${idTimetable}/timetablesSlots/${idTimetableSlots}`)
     }
   },
 

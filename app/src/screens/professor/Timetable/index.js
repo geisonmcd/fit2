@@ -22,11 +22,31 @@ export default function Timetable({ navigation }) {
     const [startModalVisible, setStartModalVisible] = useState(false);
     const [endModalVisible, setEndModalVisible] = useState(false);
     const { timetable } = route.params;
-    const [startDate, setStartDate] = useState(new Date())
-    const [endDate, setEndDate] = useState(new Date())
+    const [startTime, setStartTime] = useState(new Date())
+    const [endTime, setEndTime] = useState(new Date())
+    const [timetableSlots, setTimetableSlots] = useState([])
+    const { system } = useTheme();
 
     useEffect(() => {
     }, []);
+
+    async function addTimes() {
+        setTimetableSlots([...timetableSlots, { startTime, endTime }]);
+        await api.fit.timetableSlot.save({ idTimetableSlot: timetable.idTimetableSlot, startTime, endTime });
+    }
+
+    function renderItem({ item, index }) {
+        return (
+            <Pressable onPress={() => navigation.navigate('Timetable', { timetable: item })}>
+                <View style={[styles.itemContainer, { backgroundColor: '#eee', height: 50, justifyContent: 'center'}]}>
+                    <View style={[styles.item, { borderColor: system.separator.opaque, flexDirection: 'row', justifyContent: 'space-around'}]}>
+                        <Text style={[styles.itemText, { color: system.label.primary }]}>{Moment(item.startTime).format('hh:mm')}</Text>
+                        <Text style={[styles.itemText, { color: system.label.primary }]}>{Moment(item.endTime).format('hh:mm')}</Text>
+                    </View>
+                </View>
+            </Pressable>
+        );
+    }
 
     return (
         <View>
@@ -45,8 +65,8 @@ export default function Timetable({ navigation }) {
                         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                             <View style={[styles.modalView, { elevation: 5, backgroundColor: '#eee', }]}>
                                 <DatePicker
-                                    date={startDate}
-                                    onDateChange={setStartDate}
+                                    date={startTime}
+                                    onDateChange={setStartTime}
                                     mode="time"
                                 />
                                 <Button style={styles.button} title={'OK'} onPress={() => setStartModalVisible(false)} />
@@ -61,8 +81,8 @@ export default function Timetable({ navigation }) {
                         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                             <View style={[styles.modalView, { elevation: 5, backgroundColor: '#eee', }]}>
                                 <DatePicker
-                                    date={startDate}
-                                    onDateChange={setEndDate}
+                                    date={startTime}
+                                    onDateChange={setEndTime}
                                     mode="time"
                                 />
                                 <Button style={styles.button} title={'OK'} onPress={() => setEndModalVisible(false)} />
@@ -76,14 +96,33 @@ export default function Timetable({ navigation }) {
                         </View>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
                             <Pressable onPress={() => setStartModalVisible(true)}>
-                                <Text style={styles.textInput} placeholderTextColor="#fff" >{Moment(startDate).format('hh:mm')} </Text>
+                                <Text style={styles.textInput} placeholderTextColor="#fff" >{Moment(startTime).format('hh:mm')} </Text>
                             </Pressable>
                             <Pressable onPress={() => setEndModalVisible(true)}>   
-                                <Text style={styles.textInput} placeholderTextColor="#fff" >{Moment(endDate).format('hh:mm')} </Text>
+                                <Text style={styles.textInput} placeholderTextColor="#fff" >{Moment(endTime).format('hh:mm')} </Text>
                             </Pressable>
                         </View>
                     </View>
-                    <Button style={styles.button} title={'ADD'} onPress={() => setModalVisible(false)} />
+                    <Button style={styles.button} title={'Add slot'} onPress={() => addTimes()} />
+                    <FlatList
+                        keyExtractor={(item, index) => index.toString()}
+                        data={timetableSlots}
+                        renderItem={renderItem}
+                        ListEmptyComponent={() => (
+                            <View style={{
+                                flexGrow: 1,
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                padding: 16,
+                                marginBottom: 60
+                            }}>
+                                <Text>Sem Dados</Text>
+                            </View>
+                        )}
+                        scrollEventThrottle={20}
+                        showsVerticalScrollIndicator={false}
+                        onEndReachedThreshold={0.3}
+                    />
                 </View>
             </Page>
         </View>
