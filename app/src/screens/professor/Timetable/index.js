@@ -32,7 +32,7 @@ export default function Timetable({ navigation }) {
 
     async function addTimes() {
         setTimetableSlots([...timetableSlots, { startTime, endTime }]);
-        await api.fit.timetableSlot.save({ idTimetableSlot: timetable.idTimetableSlot, startTime, endTime });
+        await api.fit.timetables.timetableSlot.save(timetable.idTimetable, { idTimetable: timetable.idTimetable, startTime, endTime });
     }
 
     function renderItem({ item, index }) {
@@ -50,18 +50,9 @@ export default function Timetable({ navigation }) {
 
     return (
         <View>
-            <Page
-                type="static"
-                title={translate('Timetable')}
-                subtitle={timetable.name}
-                smallTitle={translate('Diaries')}
-            >
+            <Page type="static" title={translate('Timetable')} subtitle={timetable.name} smallTitle={translate('Diaries')} >
                 <View style={{ padding: 10 }}>
-                    <Modal
-                        animationType="slide"
-                        transparent={true}
-                        visible={startModalVisible}
-                    >
+                    <Modal animationType="slide" transparent={true} visible={startModalVisible} >
                         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                             <View style={[styles.modalView, { elevation: 5, backgroundColor: '#eee', }]}>
                                 <DatePicker
@@ -73,11 +64,7 @@ export default function Timetable({ navigation }) {
                             </View>
                         </View>
                     </Modal>
-                    <Modal
-                        animationType="slide"
-                        transparent={true}
-                        visible={endModalVisible}
-                    >
+                    <Modal animationType="slide" transparent={true} visible={endModalVisible} >
                         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                             <View style={[styles.modalView, { elevation: 5, backgroundColor: '#eee', }]}>
                                 <DatePicker

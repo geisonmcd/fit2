@@ -2,11 +2,16 @@ const database = require('../infra/database');
 
 const saveTimetable = async function (timetable){
     try {
-        console.log('ta salvando agora');
-        console.log(1,2,5, timetable);
         let algo = await database.query(`select * from fit.timetable`);
-        console.log('hey : ', algo);
         return database.none(`insert into fit.timetable (name) values ($1)`, [timetable.name])
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+const saveTimetableSlot = async function (timetableSlot){
+    try {
+        return database.none(`insert into fit.timetable_slot (id_timetable, start_time, end_time) values ($1, $2, $3)`, [timetableSlot.idTimetable, timetableSlot.startTime, timetableSlot.endTime]);
     } catch (error) {
         console.log(error);
     }
@@ -28,7 +33,8 @@ const getTimetables = function () {
 
 module.exports = {
     saveTimetable,
-    getTimetables
+    getTimetables,
+    saveTimetableSlot
     // updateInstitution,
     // getInstitutions,
     // deleteInstitution,

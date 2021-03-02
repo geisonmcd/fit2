@@ -13,4 +13,10 @@ router.get('/', async function (req, res) {
     res.json(timetables);
 });
 
+router.post('/:idTimetable/timetableSlots', async function (req, res) {
+    const timetableSlot = req.body;
+    await timetablesService.saveTimetableSlot(timetableSlot);
+    res.end();
+});
+
 module.exports = router;
