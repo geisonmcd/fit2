@@ -28,6 +28,12 @@ export default function Timetable({ navigation }) {
     const { system } = useTheme();
 
     useEffect(() => {
+        let getTimetableSlots = async function () {
+            let timetableSlots = await api.fit.timetables.timetableSlot.list(timetable.idTimetable);
+            console.log(timetableSlots.data);
+            setTimetableSlots(timetableSlots.data)
+        }
+        getTimetableSlots();
     }, []);
 
     async function addTimes() {

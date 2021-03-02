@@ -19,4 +19,9 @@ router.post('/:idTimetable/timetableSlots', async function (req, res) {
     res.end();
 });
 
+router.get('/:idTimetable/timetableSlots', async function (req, res) {
+    const timetables = await timetablesService.getTimetableSlots(req.params.idTimetable);
+    res.json(timetables);
+});
+
 module.exports = router;

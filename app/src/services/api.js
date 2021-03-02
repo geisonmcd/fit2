@@ -36,6 +36,7 @@ const api = {
       update: (idTimetable, timetable) => fitAxios.put(`/timetables/${idTimetable}`, timetable),
       timetableSlot: {
           save: (idTimetable, timetableSlot) => fitAxios.post(`/timetables/${idTimetable}/timetableSlots`, timetableSlot),
+          list: (idTimetable) => fitAxios.get(`timetables/${idTimetable}/timetableSlots`),
           delete: (idTimetable, idTimetableSlot) => fitAxios.delete(`/timetables/${idTimetable}/timetablesSlots/${idTimetableSlots}`)
       }
     },
