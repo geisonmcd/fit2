@@ -29,6 +29,10 @@ const getTimetableSlots = function (idTimetable) {
     return database.query(`select * from fit.timetable_slot where id_timetable = $1`, [idTimetable]);    
 };
 
+const deleteTimetableSlot = function (idTimetableSlot) {
+    return database.none(`delete from fit.timetable_slot where id_timetable_slot = $1`, [idTimetableSlot]);
+}
+
 // const deleteInstitution = async function (idInstitution) {
 //     const review = await database.oneOrNone(`select * from review where id_institution = $1`, [idInstitution]);
 //     if (review) await database.none('delete from review where id_review = $1', [review.idReview]);
@@ -39,7 +43,8 @@ module.exports = {
     saveTimetable,
     getTimetables,
     saveTimetableSlot,
-    getTimetableSlots
+    getTimetableSlots,
+    deleteTimetableSlot
     // updateInstitution,
     // getInstitutions,
     // deleteInstitution,

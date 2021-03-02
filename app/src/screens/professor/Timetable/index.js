@@ -26,13 +26,14 @@ export default function Timetable({ navigation }) {
     const [endTime, setEndTime] = useState(new Date())
     const [timetableSlots, setTimetableSlots] = useState([])
     const { system } = useTheme();
+    
+    let getTimetableSlots = async function () {
+        let timetableSlots = await api.fit.timetables.timetableSlot.list(timetable.idTimetable);
+        console.log(timetableSlots.data);
+        setTimetableSlots(timetableSlots.data)
+    }
 
-    useEffect(() => {
-        let getTimetableSlots = async function () {
-            let timetableSlots = await api.fit.timetables.timetableSlot.list(timetable.idTimetable);
-            console.log(timetableSlots.data);
-            setTimetableSlots(timetableSlots.data)
-        }
+    useEffect(() => {    
         getTimetableSlots();
     }, []);
 
@@ -41,9 +42,15 @@ export default function Timetable({ navigation }) {
         await api.fit.timetables.timetableSlot.save(timetable.idTimetable, { idTimetable: timetable.idTimetable, startTime, endTime });
     }
 
+    async function removeSlot(timetableSlot) {
+        await api.fit.timetables.timetableSlot.delete(timetableSlot.idTimetable, timetableSlot.idTimetableSlot);
+        await getTimetableSlots();
+
+    }
+
     function renderItem({ item, index }) {
         return (
-            <Pressable onPress={() => navigation.navigate('Timetable', { timetable: item })}>
+            <Pressable onPress={() => removeSlot(item)}>
                 <View style={[styles.itemContainer, { backgroundColor: '#eee', height: 50, justifyContent: 'center'}]}>
                     <View style={[styles.item, { borderColor: system.separator.opaque, flexDirection: 'row', justifyContent: 'space-around'}]}>
                         <Text style={[styles.itemText, { color: system.label.primary }]}>{Moment(item.startTime).format('hh:mm')}</Text>

@@ -24,4 +24,9 @@ router.get('/:idTimetable/timetableSlots', async function (req, res) {
     res.json(timetables);
 });
 
+router.delete('/:idTimetable/timetableSlots/:idTimetableSlot', async function (req, res) {
+     await timetablesService.deleteTimetableSlot(req.params.idTimetableSlot);
+    res.end();
+});
+
 module.exports = router;
