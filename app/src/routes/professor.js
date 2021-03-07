@@ -10,6 +10,7 @@ import {
   Timeline,
   Timetables,
   Timetable,
+  Classes,
   Diary,
   DiaryContents,
   DiaryCorrections,
@@ -172,14 +173,26 @@ function TimetablesStack() {
   );
 }
 
+function ClassesStack() {
+    return (
+        <Stack.Navigator initialRouteName="Classes" screenOptions={getDefaultScreenOptions()}>
+            <Stack.Screen name="Classes" component={Classes} options={({ route }) => ({
+                ...getDefaultOptions({ route }),
+                headerLeft: () => <BurgerButton />
+            })} />
+        </Stack.Navigator>
+  );
+}
+
 function DrawerMenu() {
  
   return (
-    <Drawer.Navigator initialRouteName="Timetables" drawerContent={(props) => <DrawerContent {...props} />}>
+    <Drawer.Navigator initialRouteName="Classes" drawerContent={(props) => <DrawerContent {...props} />}>
       <Drawer.Screen name="Timetables" component={TimetablesStack} />
-      <Drawer.Screen name="Diaries" component={DiariesStack} />
+      <Drawer.Screen name="Classes" component={ClassesStack} />
+      {/* <Drawer.Screen name="Diaries" component={DiariesStack} />
       <Drawer.Screen name="Calendar" component={CalendarStack} />
-      <Drawer.Screen name="Timeline" component={TimelineStack} />
+      <Drawer.Screen name="Timeline" component={TimelineStack} /> */}
     </Drawer.Navigator>
   );
 }

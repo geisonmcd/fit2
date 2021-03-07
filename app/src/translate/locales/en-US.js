@@ -12,6 +12,7 @@ export default {
   'Grades': 'Grades',
   'Timetables': 'Timetables',
   'Timetable': 'Timetable',
+  'Classes': 'Classes',
   'Notices': 'Notices',
   'Password': 'Password',
   'Reports': 'Reports',

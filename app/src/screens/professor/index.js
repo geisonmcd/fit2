@@ -1,5 +1,6 @@
 import Timetables from './Timetables';
 import Timetable from './Timetable';
+import Classes from './Classes';
 
 import Diaries from './Diaries';
 import Calendar from './Calendar';
@@ -24,6 +25,7 @@ export {
   Timeline,
   Timetables,
   Timetable,
+  Classes,
   Diary,
   DiaryContents,
   DiaryCorrections,

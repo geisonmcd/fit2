@@ -22,6 +22,7 @@ export default function DrawerManager({ state, navigation, descriptors, progress
     'Calendar': 'calendar',
     'Timeline': 'comments-o',
     'Timetables': 'clock-o',
+    'Classes': 'book',
   };
 
   useEffect(() => {
