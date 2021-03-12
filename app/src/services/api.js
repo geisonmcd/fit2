@@ -40,6 +40,9 @@ const api = {
           delete: (idTimetable, idTimetableSlot) => fitAxios.delete(`/timetables/${idTimetable}/timetableSlots/${idTimetableSlot}`)
       }
     },
+    classes: {
+        generateClasses: (idTimetable, startDate, endDate) => fitAxios.post(`/classes/generateClasses`, { idTimetable, startDate, endDate })
+    }
   },
 
 

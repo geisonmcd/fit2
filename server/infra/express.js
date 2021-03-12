@@ -22,6 +22,7 @@ app.options('*', function (req, res, next) {
 });
 
 app.use('/timetables', require('../routes/timetablesRoute'));
+app.use('/classes', require('../routes/classesRoute'));
 app.use('/institutions/:idInstitution/users/:idUser/reviews', require('routes/institutionsUsersReviewsRoute'));
 
 module.exports = app;

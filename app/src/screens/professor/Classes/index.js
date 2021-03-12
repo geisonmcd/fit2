@@ -9,6 +9,7 @@ import api from '../../../services/api';
 import { useAuthContext } from '../../../contexts/AuthContext';
 import { useAppContext } from '../../../contexts/AppContext';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import moment from 'moment';
 MaterialIcons.loadFont();
 
 export default function Classes({ navigation }) {
@@ -18,6 +19,11 @@ export default function Classes({ navigation }) {
     const { system } = useTheme();
     const [timetables, setTimetables] = useState([]);
     const [idSelectedTimetable, setIdSelectedTimetable] = useState([]);
+    const [startDate, setStartDate] = useState(new Date());
+    const [endDate, setEndDate] = useState(new Date());
+    const [showStartDate, setShowStartDate] = useState(false);
+    const [showEndDate, setShowEndDate] = useState(false);
+
 
     useEffect(() => {
         let getTimetables = async function () {
@@ -32,6 +38,26 @@ export default function Classes({ navigation }) {
         getTimetables();
     }, []);
 
+    const onChangeStartDate = (event, selectedDate) => {
+        if (event.type === "dismissed") {
+            return;
+        }
+        setStartDate(selectedDate);
+        setShowStartDate(false);
+    };
+
+    const onChangeEndDate = (event, selectedDate) => {
+        if (event.type === "dismissed") {
+            return;
+        }
+        setEndDate(selectedDate);
+        setShowEndDate(false);
+    };
+
+    const generateClasses = async () => {
+        await api.fit.classes.generateClasses(idSelectedTimetable, startDate, endDate);
+    };
+
     return (
         <View>
             <Page
@@ -42,7 +68,7 @@ export default function Classes({ navigation }) {
                 noDataMessage={translate('There\'s no diary')}
             >
                 <View style={{ padding: 10 }}>
-                    <View style={[styles.period, { borderColor: system.separator.opaque, borderTopWidth: 0, backgroundColor: '#FFFFFF' }]}>
+                    <View style={[{}, {}]}>
                         <Picker
                             style={styles.picker}
                             disabledStyle={styles.pickerDisabled}
@@ -53,89 +79,56 @@ export default function Classes({ navigation }) {
                             selected={idSelectedTimetable}
                             disabled={!timetables.length}
                             doneText={translate('Select')}
-                            onChange={(newValue) => console.log(newValue)}
+                            onChange={(newValue) => setIdSelectedTimetable(newValue)}
                         />
                     </View>
-                    <View style={{ borderColor: system.separator.opaque, borderTopWidth: 0, backgroundColor: '#FFFFFF' }}>
-                        <Text style={[{ color: system.label.primary, flex: 1 }]} numberOfLines={1}>Período</Text>
-                        {/* <View style={{ justifyContent: 'space-between'}}>
-                            <Pressable style={{ backgroundColor: 'green', height: 10 }}>
-                                <Text>Asdf</Text>
-                            </Pressable>
-                            <Pressable style={{ backgroundColor: 'green', height: 10, marginHorizontal: 5 }}>
-                                <Text>Asdf</Text>
-                            </Pressable>
-                        </View> */}
-                        {/* {show && (
+                    <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginTop: 20 }}>
+                        <Pressable style={[styles.datePressable, {}]} onPress={() => setShowStartDate(true)}>
+                            <Text>{moment(startDate).format('DD/MM/YY')}</Text>
+                        </Pressable>
+                        <Pressable style={styles.datePressable} onPress={() => setShowEndDate(true)}>
+                            <Text>{moment(endDate).format('DD/MM/YY')}</Text>
+                        </Pressable>
+                        {showStartDate && (
                             <DateTimePicker
                                 testID="dateTimePicker"
-                                value={date}
-                                mode={mode}
+                                value={startDate}
+                                mode={'date'}
                                 is24Hour={true}
                                 display="default"
-                                onChange={onChange}
+                                onChange={onChangeStartDate}
                             />
-                        )} */}
+                        )}
+                        {showEndDate && (
+                            <DateTimePicker
+                                testID="dateTimePicker2"
+                                value={endDate}
+                                mode={'date'}
+                                is24Hour={true}
+                                display="default"
+                                onChange={onChangeEndDate}
+                            />
+                        )}
                     </View>
+                    <View style={{ borderColor: system.separator.opaque, borderTopWidth: 0 }}>
+                        <Text style={[{ color: 'black', flex: 1 }]} numberOfLines={1}>Período</Text>
+                    </View>
+                    <Button style={{ marginTop: 20 }} title={'Gerar'} onPress={() => generateClasses()} />
                 </View>
             </Page>
         </View>
     );
 }
 const styles = StyleSheet.create({
-    picker: {
-        fontSize: 15,
-        backgroundColor: '#FFFFFF',
-        marginVertical: 0,
-        borderWidth: 0,
-        borderRadius: 0,
-        paddingVertical: 0,
-        maxWidth: Dimensions.get('screen').width / 2
-    },
-    centeredView: {
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-        marginTop: 22
-    },
-    container: {
-        flex: 1,
+    datePressable: {
+        borderWidth: 1,
+        borderColor: 'grey',
+        borderRadius: 20,
+        width: 180,
+        height: 40,
         justifyContent: 'center',
-        padding: 50,
-        backgroundColor: '#444950'
-    },
-    textInput: {
-        borderWidth: 0,
-        borderRadius: 4,
-        paddingHorizontal: 20,
-        paddingVertical: 15,
-        fontSize: 16,
-        marginBottom: 4,
-        backgroundColor: '#575e67',
-        color: '#fff'
-    },
-    button: {
-        paddingVertical: 15,
-        marginVertical: 1
-    },
-
-    itemContainer: {
-        justifyContent: 'center',
-        borderWidth: 0
-    },
-    item: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        paddingRight: 16,
-        paddingVertical: 12,
-        marginLeft: 5,
-        borderBottomWidth: 0.5,
-    },
-    itemText: {
-        fontSize: 17,
-        flexGrow: 1
-    },
-    itemIcon: {}
+        alignItems: 'center'
+    }
 });
 
 
