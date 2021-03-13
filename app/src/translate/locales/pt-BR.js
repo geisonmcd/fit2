@@ -37,6 +37,9 @@ export default {
   'Student': 'Aluno',
   'Choose the access profile': 'Escolha o perfil de acesso',
   'Select': 'Selecionar',
+  'GenerateClasses': 'Gerar Aulas',
+  'Classes': 'Aulas',
+  'Timetables': 'Quadros de Horário',
 
 
 

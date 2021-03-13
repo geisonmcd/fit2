@@ -3,7 +3,6 @@ const moment = require(`moment`);
 
 const generateClasses = async function (idTimetable, startDateString, endDateString){
     let slots = await database.query(`select * from fit.timetable_slot where id_timetable = $1`, [idTimetable]);
-    console.log({slots});
     let startDate = moment(startDateString);
     let endDate = moment(endDateString);
     let startTime;

@@ -11,6 +11,7 @@ import {
   Timetables,
   Timetable,
   Classes,
+  GenerateClasses,
   Diary,
   DiaryContents,
   DiaryCorrections,
@@ -73,91 +74,6 @@ function BackButton() {
   );
 }
 
-function DiariesStack() {
-  return (
-    <Stack.Navigator initialRouteName="Diaries" screenOptions={getDefaultScreenOptions()}>
-      <Stack.Screen name="Diaries" component={Diaries} options={({ route }) => ({
-        ...getDefaultOptions({ route }),
-        headerLeft: () => <BurgerButton />
-      })} />
-      <Stack.Screen name="Diary" component={Diary} options={({ route }) => ({
-        ...getDefaultOptions({ route }),
-        headerLeft: () => <BackButton />
-      })} />
-      <Stack.Screen name="DiaryContents" component={DiaryContents} options={({ route }) => ({
-        ...getDefaultOptions({ route }),
-        headerLeft: () => <BackButton />
-      })} />
-      <Stack.Screen name="DiaryCorrections" component={DiaryCorrections} options={({ route }) => ({
-        ...getDefaultOptions({ route }),
-        headerLeft: () => <BackButton />
-      })} />
-      <Stack.Screen name="DiaryAttendances" component={DiaryAttendances} options={({ route }) => ({
-        ...getDefaultOptions({ route }),
-        headerLeft: () => <BackButton />
-      })} />
-      <Stack.Screen name="DiaryGrades" component={DiaryGrades} options={({ route }) => ({
-        ...getDefaultOptions({ route }),
-        headerLeft: () => <BackButton />
-      })} />
-      <Stack.Screen name="DiaryIncidents" component={DiaryIncidents} options={({ route }) => ({
-        ...getDefaultOptions({ route }),
-        headerLeft: () => <BackButton />
-      })} />
-      <Stack.Screen name="DiaryCalendars" component={DiaryCalendars} options={({ route }) => ({
-        ...getDefaultOptions({ route }),
-        headerLeft: () => <BackButton />
-      })} />
-      <Stack.Screen name="DiaryFreeAssessments" component={DiaryFreeAssessments} options={({ route }) => ({
-        ...getDefaultOptions({ route }),
-        headerLeft: () => <BackButton />
-      })} />
-      <Stack.Screen name="DiaryExams" component={DiaryExams} options={({ route }) => ({
-        ...getDefaultOptions({ route }),
-        headerLeft: () => <BackButton />
-      })} />
-      <Stack.Screen name="DiaryNotices" component={DiaryNotices} options={({ route }) => ({
-        ...getDefaultOptions({ route }),
-        headerLeft: () => <BackButton />
-      })} />
-      <Stack.Screen name="DiaryAverages" component={DiaryAverages} options={({ route }) => ({
-        ...getDefaultOptions({ route }),
-        headerLeft: () => <BackButton />
-      })} />
-      <Stack.Screen name="DiaryReports" component={DiaryReports} options={({ route }) => ({
-        ...getDefaultOptions({ route }),
-        headerLeft: () => <BackButton />
-      })} />
-      <Stack.Screen name="DiaryStudents" component={DiaryStudents} options={({ route }) => ({
-        ...getDefaultOptions({ route }),
-        headerLeft: () => <BackButton />
-      })} />
-    </Stack.Navigator>
-  );
-}
-
-function CalendarStack() {
-  return (
-    <Stack.Navigator initialRouteName="Calendar" screenOptions={getDefaultScreenOptions()}>
-      <Stack.Screen name="Calendar" component={Calendar} options={({ route }) => ({
-        ...getDefaultOptions({ route }),
-        headerLeft: () => <BurgerButton />
-      })} />
-    </Stack.Navigator>
-  );
-}
-
-function TimelineStack() {
-  return (
-    <Stack.Navigator initialRouteName="Timeline" screenOptions={getDefaultScreenOptions()}>
-      <Stack.Screen name="Timeline" component={Timeline} options={({ route }) => ({
-        ...getDefaultOptions({ route }),
-        headerLeft: () => <BurgerButton />
-      })} />
-    </Stack.Navigator>
-  );
-}
-
 function TimetablesStack() {
     return (
         <Stack.Navigator initialRouteName="Timetables" screenOptions={getDefaultScreenOptions()}>
@@ -184,15 +100,23 @@ function ClassesStack() {
   );
 }
 
+function GenerateClassesStack() {
+    return (
+        <Stack.Navigator initialRouteName="GenerateClasses" screenOptions={getDefaultScreenOptions()}>
+            <Stack.Screen name="GenerateClasses" component={GenerateClasses} options={({ route }) => ({
+                ...getDefaultOptions({ route }),
+                headerLeft: () => <BurgerButton />
+            })} />
+        </Stack.Navigator>
+  );
+}
+
 function DrawerMenu() {
- 
   return (
     <Drawer.Navigator initialRouteName="Classes" drawerContent={(props) => <DrawerContent {...props} />}>
       <Drawer.Screen name="Timetables" component={TimetablesStack} />
+      <Drawer.Screen name="GenerateClasses" component={GenerateClassesStack} />
       <Drawer.Screen name="Classes" component={ClassesStack} />
-      {/* <Drawer.Screen name="Diaries" component={DiariesStack} />
-      <Drawer.Screen name="Calendar" component={CalendarStack} />
-      <Drawer.Screen name="Timeline" component={TimelineStack} /> */}
     </Drawer.Navigator>
   );
 }

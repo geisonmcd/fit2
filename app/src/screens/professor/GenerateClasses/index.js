@@ -12,11 +12,9 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import moment from 'moment';
 import { Calendar, CalendarList, Agenda } from 'react-native-calendars';
 
-import EventCalendar from 'react-native-events-calendar'
-
 MaterialIcons.loadFont();
 
-export default function Classes({ navigation }) {
+export default function GenerateClasses({ navigation }) {
 
     const { } = useAuthContext();
     const { } = useAppContext();
@@ -28,21 +26,6 @@ export default function Classes({ navigation }) {
     const [showStartDate, setShowStartDate] = useState(false);
     const [showEndDate, setShowEndDate] = useState(false);
     let { width } = Dimensions.get('window')
-    const events = [
-        { start: '2017-09-07 00:30:00', end: '2017-09-07 01:30:00', title: 'Dr. Mariana Joseph', summary: '3412 Piedmont Rd NE, GA 3032' },
-        { start: '2017-09-07 01:30:00', end: '2017-09-07 02:20:00', title: 'Dr. Mariana Joseph', summary: '3412 Piedmont Rd NE, GA 3032' },
-        { start: '2017-09-07 04:10:00', end: '2017-09-07 04:40:00', title: 'Dr. Mariana Joseph', summary: '3412 Piedmont Rd NE, GA 3032' },
-        { start: '2017-09-07 01:05:00', end: '2017-09-07 01:45:00', title: 'Dr. Mariana Joseph', summary: '3412 Piedmont Rd NE, GA 3032' },
-        { start: '2017-09-07 14:30:00', end: '2017-09-07 16:30:00', title: 'Dr. Mariana Joseph', summary: '3412 Piedmont Rd NE, GA 3032' },
-        { start: '2017-09-08 01:20:00', end: '2017-09-08 02:20:00', title: 'Dr. Mariana Joseph', summary: '3412 Piedmont Rd NE, GA 3032' },
-        { start: '2017-09-08 04:10:00', end: '2017-09-08 04:40:00', title: 'Dr. Mariana Joseph', summary: '3412 Piedmont Rd NE, GA 3032' },
-        { start: '2017-09-08 00:45:00', end: '2017-09-08 01:45:00', title: 'Dr. Mariana Joseph', summary: '3412 Piedmont Rd NE, GA 3032' },
-        { start: '2017-09-08 11:30:00', end: '2017-09-08 12:30:00', title: 'Dr. Mariana Joseph', summary: '3412 Piedmont Rd NE, GA 3032' },
-        { start: '2017-09-09 01:30:00', end: '2017-09-09 02:00:00', title: 'Dr. Mariana Joseph', summary: '3412 Piedmont Rd NE, GA 3032' },
-        { start: '2017-09-09 03:10:00', end: '2017-09-09 03:40:00', title: 'Dr. Mariana Joseph', summary: '3412 Piedmont Rd NE, GA 3032' },
-        { start: '2017-09-09 00:10:00', end: '2017-09-09 01:45:00', title: 'Dr. Mariana Joseph', summary: '3412 Piedmont Rd NE, GA 3032' }
-    ]
-    
 
     useEffect(() => {
         let getTimetables = async function () {
@@ -77,14 +60,10 @@ export default function Classes({ navigation }) {
         await api.fit.classes.generateClasses(idSelectedTimetable, startDate, endDate);
     };
 
-    const rowHasChanged = async (r1, r2) => {
-        return r1.name !== r2.name
-      }
-
     return (
         <View style={{flex: 1}}>
 
-            {/* <Page
+            <Page
                 type="static"
                 title={'Gerar aulas'}
                 smallTitle={translate('Diaries')}
@@ -138,13 +117,7 @@ export default function Classes({ navigation }) {
                     <Button style={{ marginTop: 20 }} title={'Gerar'} onPress={() => generateClasses()} />
                 </View>
               
-            </Page> */}
-                    <EventCalendar
-      eventTapped={(e) => console.log(e)}
-      events={events}
-      width={width}
-      initDate={'2017-09-08'}
-    />
+            </Page>
         </View>
     );
 }
