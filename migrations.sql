@@ -16,5 +16,6 @@ create table fit.class (
   id_class serial primary key not null,
   name text,
   start_time timestamp with time zone,
-  end_time timestamp with time zone
+  end_time timestamp with time zone,
+  locked boolean default true
 );

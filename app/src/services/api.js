@@ -41,7 +41,10 @@ const api = {
       }
     },
     classes: {
-        generateClasses: (idTimetable, startDate, endDate) => fitAxios.post(`/classes/generateClasses`, { idTimetable, startDate, endDate })
+        generateClasses: (idTimetable, startDate, endDate) => fitAxios.post(`/classes/generateClasses`, { idTimetable, startDate, endDate }),
+        list: (date) => fitAxios.get(`classes?date=${date}`, {}),
+        unlock: (date) => fitAxios.post(`classes/unlock?date=${date}`, {}),
+        lock: (date) => fitAxios.post(`classes/lock?date=${date}`, {}),
     }
   },
 
