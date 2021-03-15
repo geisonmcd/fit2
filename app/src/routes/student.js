@@ -3,7 +3,7 @@ import { View, Pressable } from 'react-native';
 import { useNavigation, useTheme } from '@react-navigation/native';
 import { createStackNavigator, TransitionPresets } from '@react-navigation/stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import { Drawer as DrawerContent } from '../components';
+import { Drawer as DrawerContent, Modal } from '../components';
 import {
   Calendar,
   Diaries,
@@ -17,10 +17,11 @@ import {
   DiaryContents,
   DiaryFreeAssessments,
   DiaryGrades,
-  DiaryReports
+  DiaryReports,
+  Configurations
 } from '../screens/student';
 // import { Modal } from '../components';
-import { useAuthContext } from '../contexts/AuthContext';
+// import { useAuthContext } from '../contexts/AuthContext';
 import { translate } from '../translate';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 MaterialIcons.loadFont();
@@ -28,8 +29,7 @@ MaterialIcons.loadFont();
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 
-function getDefaultScreenOptions() {
-  const { system } = useTheme();
+function getDefaultScreenOptions(system) {
   return {
     backgroundColor: system.background.primary,
     headerStyle: {
@@ -41,8 +41,7 @@ function getDefaultScreenOptions() {
   };
 }
 
-function getDefaultOptions(route) {
-  const { system } = useTheme();
+function getDefaultOptions(system, route) {
   return {
     title: route.params?.name ? translate(route.params?.name) : '',
     headerStyle: { backgroundColor: system.background.primary, elevation: 0, shadowOffset: { width: 0, height: 0 } },
@@ -68,34 +67,35 @@ function BackButton() {
 }
 
 function DiariesStack() {
+  const { system } = useTheme();
   return (
-    <Stack.Navigator initialRouteName="Diaries" screenOptions={getDefaultScreenOptions()}>
+    <Stack.Navigator initialRouteName="Diaries" screenOptions={getDefaultScreenOptions(system)}>
       <Stack.Screen name="Diaries" component={Diaries} options={({ route }) => ({
-        ...getDefaultOptions({ route }),
+        ...getDefaultOptions(system, route),
         headerLeft: () => <BurgerButton />,
       })} />
       <Stack.Screen name="Diary" component={Diary} options={({ route }) => ({
-        ...getDefaultOptions({ route }),
+        ...getDefaultOptions(system, route),
         headerLeft: () => <BackButton />,
       })} />
       <Stack.Screen name="DiaryContents" component={DiaryContents} options={({ route }) => ({
-        ...getDefaultOptions({ route }),
+        ...getDefaultOptions(system, route),
         headerLeft: () => <BackButton />,
       })} />
       <Stack.Screen name="DiaryAttendances" component={DiaryAttendances} options={({ route }) => ({
-        ...getDefaultOptions({ route }),
+        ...getDefaultOptions(system, route),
         headerLeft: () => <BackButton />,
       })} />
       <Stack.Screen name="DiaryGrades" component={DiaryGrades} options={({ route }) => ({
-        ...getDefaultOptions({ route }),
+        ...getDefaultOptions(system, route),
         headerLeft: () => <BackButton />,
       })} />
       <Stack.Screen name="DiaryFreeAssessments" component={DiaryFreeAssessments} options={({ route }) => ({
-        ...getDefaultOptions({ route }),
+        ...getDefaultOptions(system, route),
         headerLeft: () => <BackButton />,
       })} />
       <Stack.Screen name="DiaryReports" component={DiaryReports} options={({ route }) => ({
-        ...getDefaultOptions({ route }),
+        ...getDefaultOptions(system, route),
         headerLeft: () => <BackButton />,
       })} />
     </Stack.Navigator>
@@ -103,10 +103,11 @@ function DiariesStack() {
 }
 
 function CalendarStack() {
+  const { system } = useTheme();
   return (
-    <Stack.Navigator initialRouteName="Calendar" screenOptions={getDefaultScreenOptions()}>
+    <Stack.Navigator initialRouteName="Calendar" screenOptions={getDefaultScreenOptions(system)}>
       <Stack.Screen name="Calendar" component={Calendar} options={({ route }) => ({
-        ...getDefaultOptions({ route }),
+        ...getDefaultOptions(system, route),
         headerLeft: () => <BurgerButton />
       })} />
     </Stack.Navigator>
@@ -114,10 +115,11 @@ function CalendarStack() {
 }
 
 function TimelineStack() {
+  const { system } = useTheme();
   return (
-    <Stack.Navigator initialRouteName="Timeline" screenOptions={getDefaultScreenOptions()}>
+    <Stack.Navigator initialRouteName="Timeline" screenOptions={getDefaultScreenOptions(system)}>
       <Stack.Screen name="Timeline" component={Timeline} options={({ route }) => ({
-        ...getDefaultOptions({ route }),
+        ...getDefaultOptions(system, route),
         headerLeft: () => <BurgerButton />
       })} />
     </Stack.Navigator>
@@ -125,10 +127,11 @@ function TimelineStack() {
 }
 
 function IncidentsStack() {
+  const { system } = useTheme();
   return (
-    <Stack.Navigator initialRouteName="Incidents" screenOptions={getDefaultScreenOptions()}>
+    <Stack.Navigator initialRouteName="Incidents" screenOptions={getDefaultScreenOptions(system)}>
       <Stack.Screen name="Incidents" component={Incidents} options={({ route }) => ({
-        ...getDefaultOptions({ route }),
+        ...getDefaultOptions(system, route),
         headerLeft: () => <BurgerButton />
       })} />
     </Stack.Navigator>
@@ -136,10 +139,11 @@ function IncidentsStack() {
 }
 
 function EnrollmentsStack() {
+  const { system } = useTheme();
   return (
-    <Stack.Navigator initialRouteName="Enrollments" screenOptions={getDefaultScreenOptions()}>
+    <Stack.Navigator initialRouteName="Enrollments" screenOptions={getDefaultScreenOptions(system)}>
       <Stack.Screen name="Enrollments" component={Enrollments} options={({ route }) => ({
-        ...getDefaultOptions({ route }),
+        ...getDefaultOptions(system, route),
         headerLeft: () => <BurgerButton />
       })} />
     </Stack.Navigator>
@@ -147,10 +151,11 @@ function EnrollmentsStack() {
 }
 
 function FinancialStack() {
+  const { system } = useTheme();
   return (
-    <Stack.Navigator initialRouteName="Financial" screenOptions={getDefaultScreenOptions()}>
+    <Stack.Navigator initialRouteName="Financial" screenOptions={getDefaultScreenOptions(system)}>
       <Stack.Screen name="Financial" component={Financial} options={({ route }) => ({
-        ...getDefaultOptions({ route }),
+        ...getDefaultOptions(system, route),
         headerLeft: () => <BurgerButton />
       })} />
     </Stack.Navigator>
@@ -158,10 +163,11 @@ function FinancialStack() {
 }
 
 function EvaluationFormsStack() {
+  const { system } = useTheme();
   return (
-    <Stack.Navigator initialRouteName="EvaluationForms" screenOptions={getDefaultScreenOptions()}>
+    <Stack.Navigator initialRouteName="EvaluationForms" screenOptions={getDefaultScreenOptions(system)}>
       <Stack.Screen name="EvaluationForms" component={EvaluationForms} options={({ route }) => ({
-        ...getDefaultOptions({ route }),
+        ...getDefaultOptions(system, route),
         headerLeft: () => <BurgerButton />
       })} />
     </Stack.Navigator>
@@ -184,14 +190,17 @@ function DrawerMenu() {
 
 function RootStack() {
   return (
-    <View>
-      <Text>hey</Text>
-    </View>
-  )
-  return (
-    <Stack.Navigator mode="modal">
-      <Stack.Screen name="DrawerMenu" component={DrawerMenu} options={{ headerShown: false }} />
-      {/* <Stack.Screen name="Modal" component={Modal} options={{ headerShown: false }} /> */}
+    <Stack.Navigator
+      mode="modal"
+      screenOptions={{
+        headerShown: false,
+        gestureEnabled: true,
+        cardOverlayEnabled: true,
+        ...TransitionPresets.ModalPresentationIOS,
+      }}
+    >
+      <Stack.Screen name="DrawerMenu" component={DrawerMenu} options={{}} />
+      {/* <Stack.Screen name="Configurations" component={Configurations} options={{}} /> */}
     </Stack.Navigator>
   );
 }

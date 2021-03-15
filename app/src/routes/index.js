@@ -8,19 +8,18 @@ import { Text, View } from 'react-native';
 
 
 export default function Routes() {
+
   let { isAuthenticated, isLoading, role } = useAuthContext();
 
   if (isLoading) {
     return <SplashScreen />;
   }
 
-  role = 'PROFESSOR';
-
+  //implementar isso aqui mais tarde
   if (isAuthenticated) {
     if (role) {
-      return role === 'STUDENT' ? <StudentRoutes /> : <ProfessorRoutes />;
+      return role === 'client' ? <StudentRoutes /> : <ProfessorRoutes />;
     }
-    // return <SwitchProfile />
   }
 
   return <PublicRoutes />;

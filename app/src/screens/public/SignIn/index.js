@@ -15,8 +15,13 @@ export default function SignIn() {
   // const [password, setPassword] = useState('12345678f');
 
   // Professor
-  const [username, setUsername] = useState('fernandombernardino@gmail.com');
-  const [password, setPassword] = useState('12345678');
+//   const [username, setUsername] = useState('fernandombernardino@gmail.com');
+//   const [password, setPassword] = useState('12345678');
+
+//  const [username, setUsername] = useState('fernandombernardino@gmail.com');
+//   const [password, setPassword] = useState('12345678');
+ const [username, setUsername] = useState('a');
+  const [password, setPassword] = useState('a');
 
    // Aluno
   // const [username, setUsername] = useState('geison.machado@gennera.com.br');

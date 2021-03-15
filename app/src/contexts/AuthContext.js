@@ -45,9 +45,8 @@ function AuthContextProvider({ children }) {
     }
   }, INITIAL_STATE);
 
-  async function loadSession() {
-    const session = await authService.getSession();
-    console.log('voltou da sessão');
+  async function loadSession(username) {
+    const session = await authService.getSession(username);
     await LocalStorage.set('session', session);
     dispatch({ type: 'LOAD_SESSION', session });
     return session;
@@ -61,9 +60,11 @@ function AuthContextProvider({ children }) {
   async function signIn(username, password) {
     try {
       const token = await authService.authenticate(username, password);
+      console.log('esse é o token: '+ token);
       await LocalStorage.set('token', token);
-      const session = await loadSession();
-      await setActiveRole(session.user.roles.length === 1 ? session.user.roles[0] : null);
+      const session = await loadSession(username);
+      console.log({session});
+      await setActiveRole(session.role);
       dispatch({ type: 'SIGN_IN', token });
     } catch (error) {
       console.log(error);

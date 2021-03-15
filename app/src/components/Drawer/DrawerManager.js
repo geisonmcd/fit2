@@ -27,28 +27,6 @@ export default function DrawerManager({ state, navigation, descriptors, progress
     };
 
     useEffect(() => {
-        const list = session.customers.map(customer => ({
-            key: customer.idCustomer,
-            label: customer.name,
-            value: customer.idCustomer
-        }));
-        if (JSON.stringify(list) !== JSON.stringify(customers)) {
-            setCustomers(list);
-        }
-    }, [session]);
-
-    useEffect(() => {
-        const list = session.institutions.map(institution => ({
-            key: institution.idInstitution,
-            label: institution.name,
-            value: institution.idInstitution
-        }));
-        if (JSON.stringify(list) !== JSON.stringify(institutions) && idCustomer) {
-            setInstitutions(list);
-        }
-    }, [idCustomer, session]);
-
-    useEffect(() => {
         async function getDiaries(idInstitution) {
             const response = await api.classroom.institutions.diaries.list(idInstitution);
             setDiaries(response.data);

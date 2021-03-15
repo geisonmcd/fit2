@@ -45,7 +45,9 @@ const api = {
         list: (date) => fitAxios.get(`classes?date=${date}`, {}),
         unlock: (date) => fitAxios.post(`classes/unlock?date=${date}`, {}),
         lock: (date) => fitAxios.post(`classes/lock?date=${date}`, {}),
-    }
+    },
+    login: (username, password) => fitAxios.post('public/auth/login', { username, password }),
+    session: (username) => fitAxios.get(`public/auth/session?username=${username}`, {}),
   },
 
 

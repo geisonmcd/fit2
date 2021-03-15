@@ -1,3 +1,15 @@
+drop table fit.user;
+create table fit.user (
+  id_user serial primary key not null,
+  username text unique,
+  password text,
+  name text not null,
+  role text not null
+);
+
+-- insert into fit.user (username, password, name, role) values ('a', '1', 'geison', 'manager');
+-- INSERT INTO fit."user" (id_user, username, "password", "name", "role") VALUES(2, 'b', 'b', 'chali', 'client');
+
 create table fit.timetable (
   id_timetable serial primary key not null,
   name text not null
@@ -19,3 +31,4 @@ create table fit.class (
   end_time timestamp with time zone,
   locked boolean default true
 );
+

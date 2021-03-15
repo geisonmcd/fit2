@@ -23,6 +23,7 @@ app.options('*', function (req, res, next) {
 
 app.use('/timetables', require('../routes/timetablesRoute'));
 app.use('/classes', require('../routes/classesRoute'));
-app.use('/institutions/:idInstitution/users/:idUser/reviews', require('routes/institutionsUsersReviewsRoute'));
+app.use('/public', require('../routes/publicRoute'));
+
 
 module.exports = app;

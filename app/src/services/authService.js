@@ -1,12 +1,12 @@
 import api from '../services/api';
 
 async function authenticate(username, password) {
-  const response = await api.gennera.login(username, password);
+  const response = await api.fit.login(username, password);
   return (response.data || {}).token;
 }
 
-async function getSession() {
-  const response = await api.gennera.session();
+async function getSession(username) {
+  const response = await api.fit.session(username);
   console.log({response});
   return response.data;
 }
