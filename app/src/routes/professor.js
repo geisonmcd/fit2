@@ -4,28 +4,7 @@ import { useNavigation, useTheme } from '@react-navigation/native';
 import { createStackNavigator, TransitionPresets } from '@react-navigation/stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { Drawer as DrawerContent } from '../components';
-import {
-  Diaries,
-  Calendar,
-  Timeline,
-  Timetables,
-  Timetable,
-  Classes,
-  GenerateClasses,
-  Diary,
-  DiaryContents,
-  DiaryCorrections,
-  DiaryAttendances,
-  DiaryGrades,
-  DiaryIncidents,
-  DiaryCalendars,
-  DiaryFreeAssessments,
-  DiaryExams,
-  DiaryNotices,
-  DiaryAverages,
-  DiaryReports,
-  DiaryStudents
-} from '../screens/professor';
+import { Timetables, Timetable, Classes, GenerateClasses, } from '../screens/professor';
 // import { Modal } from '../components';
 import { useAuthContext } from '../contexts/AuthContext';
 import { translate } from '../translate';
