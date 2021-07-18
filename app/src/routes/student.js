@@ -5,20 +5,8 @@ import { createStackNavigator, TransitionPresets } from '@react-navigation/stack
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { Drawer as DrawerContent, Modal } from '../components';
 import {
-  Calendar,
-  Diaries,
-  Enrollments,
-  EvaluationForms,
-  Financial,
-  Incidents,
-  Timeline,
-  Diary,
-  DiaryAttendances,
-  DiaryContents,
-  DiaryFreeAssessments,
-  DiaryGrades,
-  DiaryReports,
-  Configurations
+  StudentClasses,
+  StudentClass
 } from '../screens/student';
 // import { Modal } from '../components';
 // import { useAuthContext } from '../contexts/AuthContext';
@@ -66,139 +54,33 @@ function BackButton() {
   );
 }
 
-function DiariesStack() {
+function StudentClassesStack() {
   const { system } = useTheme();
   return (
-    <Stack.Navigator initialRouteName="Diaries" screenOptions={getDefaultScreenOptions(system)}>
-      <Stack.Screen name="Diaries" component={Diaries} options={({ route }) => ({
+    <Stack.Navigator initialRouteName="StudentClasses" screenOptions={getDefaultScreenOptions(system)}>
+      <Stack.Screen name="StudentClassesStack" component={StudentClasses} options={({ route }) => ({
         ...getDefaultOptions(system, route),
         headerLeft: () => <BurgerButton />,
-      })} />
-      <Stack.Screen name="Diary" component={Diary} options={({ route }) => ({
+      })} />     
+      <Stack.Screen name="StudentClass" component={StudentClass} options={({ route }) => ({
         ...getDefaultOptions(system, route),
-        headerLeft: () => <BackButton />,
-      })} />
-      <Stack.Screen name="DiaryContents" component={DiaryContents} options={({ route }) => ({
-        ...getDefaultOptions(system, route),
-        headerLeft: () => <BackButton />,
-      })} />
-      <Stack.Screen name="DiaryAttendances" component={DiaryAttendances} options={({ route }) => ({
-        ...getDefaultOptions(system, route),
-        headerLeft: () => <BackButton />,
-      })} />
-      <Stack.Screen name="DiaryGrades" component={DiaryGrades} options={({ route }) => ({
-        ...getDefaultOptions(system, route),
-        headerLeft: () => <BackButton />,
-      })} />
-      <Stack.Screen name="DiaryFreeAssessments" component={DiaryFreeAssessments} options={({ route }) => ({
-        ...getDefaultOptions(system, route),
-        headerLeft: () => <BackButton />,
-      })} />
-      <Stack.Screen name="DiaryReports" component={DiaryReports} options={({ route }) => ({
-        ...getDefaultOptions(system, route),
-        headerLeft: () => <BackButton />,
-      })} />
-    </Stack.Navigator>
-  );
-}
-
-function CalendarStack() {
-  const { system } = useTheme();
-  return (
-    <Stack.Navigator initialRouteName="Calendar" screenOptions={getDefaultScreenOptions(system)}>
-      <Stack.Screen name="Calendar" component={Calendar} options={({ route }) => ({
-        ...getDefaultOptions(system, route),
-        headerLeft: () => <BurgerButton />
-      })} />
-    </Stack.Navigator>
-  );
-}
-
-function TimelineStack() {
-  const { system } = useTheme();
-  return (
-    <Stack.Navigator initialRouteName="Timeline" screenOptions={getDefaultScreenOptions(system)}>
-      <Stack.Screen name="Timeline" component={Timeline} options={({ route }) => ({
-        ...getDefaultOptions(system, route),
-        headerLeft: () => <BurgerButton />
-      })} />
-    </Stack.Navigator>
-  );
-}
-
-function IncidentsStack() {
-  const { system } = useTheme();
-  return (
-    <Stack.Navigator initialRouteName="Incidents" screenOptions={getDefaultScreenOptions(system)}>
-      <Stack.Screen name="Incidents" component={Incidents} options={({ route }) => ({
-        ...getDefaultOptions(system, route),
-        headerLeft: () => <BurgerButton />
-      })} />
-    </Stack.Navigator>
-  );
-}
-
-function EnrollmentsStack() {
-  const { system } = useTheme();
-  return (
-    <Stack.Navigator initialRouteName="Enrollments" screenOptions={getDefaultScreenOptions(system)}>
-      <Stack.Screen name="Enrollments" component={Enrollments} options={({ route }) => ({
-        ...getDefaultOptions(system, route),
-        headerLeft: () => <BurgerButton />
-      })} />
-    </Stack.Navigator>
-  );
-}
-
-function FinancialStack() {
-  const { system } = useTheme();
-  return (
-    <Stack.Navigator initialRouteName="Financial" screenOptions={getDefaultScreenOptions(system)}>
-      <Stack.Screen name="Financial" component={Financial} options={({ route }) => ({
-        ...getDefaultOptions(system, route),
-        headerLeft: () => <BurgerButton />
-      })} />
-    </Stack.Navigator>
-  );
-}
-
-function EvaluationFormsStack() {
-  const { system } = useTheme();
-  return (
-    <Stack.Navigator initialRouteName="EvaluationForms" screenOptions={getDefaultScreenOptions(system)}>
-      <Stack.Screen name="EvaluationForms" component={EvaluationForms} options={({ route }) => ({
-        ...getDefaultOptions(system, route),
-        headerLeft: () => <BurgerButton />
-      })} />
+        headerLeft: () => <BurgerButton />,
+      })} />     
     </Stack.Navigator>
   );
 }
 
 function DrawerMenu() {
   return (
-    <Drawer.Navigator initialRouteName="Diaries" drawerContent={(props) => <DrawerContent {...props} />}>
-      <Drawer.Screen name="Diaries" component={DiariesStack} />
-      <Drawer.Screen name="Calendar" component={CalendarStack} />
-      <Drawer.Screen name="Timeline" component={TimelineStack} />
-      <Drawer.Screen name="Incidents" component={IncidentsStack} />
-      <Drawer.Screen name="Enrollments" component={EnrollmentsStack} />
-      <Drawer.Screen name="Financial" component={FinancialStack} />
-      <Drawer.Screen name="Evaluation Forms" component={EvaluationFormsStack} />
+    <Drawer.Navigator initialRouteName="StudenClasses" drawerContent={(props) => <DrawerContent {...props} />}>
+      <Drawer.Screen name="StudenClasses" component={StudentClassesStack} />
     </Drawer.Navigator>
   );
 }
 
 function RootStack() {
   return (
-    <Stack.Navigator
-      mode="modal"
-      screenOptions={{
-        headerShown: false,
-        gestureEnabled: true,
-        cardOverlayEnabled: true,
-        ...TransitionPresets.ModalPresentationIOS,
-      }}
-    >
+    <Stack.Navigator mode="modal" screenOptions={{ headerShown: false, gestureEnabled: true, cardOverlayEnabled: true, ...TransitionPresets.ModalPresentationIOS, }} >
       <Stack.Screen name="DrawerMenu" component={DrawerMenu} options={{}} />
       {/* <Stack.Screen name="Configurations" component={Configurations} options={{}} /> */}
     </Stack.Navigator>

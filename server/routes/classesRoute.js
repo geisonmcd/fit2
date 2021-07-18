@@ -4,9 +4,16 @@ const timetablesService = require('../services/timetablesService');
 const classesService = require('../services/classesService');
 
 router.post('/generateClasses', async function (req, res) {
-    const { idTimetable, startDate, endDate } = req.body;
-    await classesService.generateClasses(idTimetable, startDate, endDate);
+    const { idTimetable, startDate, endDate, vacancies } = req.body;
+    await classesService.generateClasses(idTimetable, startDate, endDate, vacancies);
     res.end();
+});
+
+router.post('/:idClass/confirmAttendance', async function (req, res) {
+    const idClass = req.params.idClass;
+    const { idUser } = req.body;
+    let users = await classesService.confirmAttendance(idClass, idUser);
+    res.json(users);
 });
 
 router.post('/lock', async function (req, res) {

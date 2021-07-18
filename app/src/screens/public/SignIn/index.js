@@ -7,29 +7,11 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 MaterialIcons.loadFont();
 
 export default function SignIn() {
-  // const [username, setUsername] = useState('');
-  // const [password, setPassword] = useState('');
 
-  // Aluno
-  // const [username, setUsername] = useState('fernando.bernardino@gennera.com.br');
-  // const [password, setPassword] = useState('12345678f');
-
-  // Professor
-//   const [username, setUsername] = useState('fernandombernardino@gmail.com');
-//   const [password, setPassword] = useState('12345678');
-
-//  const [username, setUsername] = useState('fernandombernardino@gmail.com');
-//   const [password, setPassword] = useState('12345678');
- const [username, setUsername] = useState('a');
+  let professor = true;
+  const [username, setUsername] = professor ? useState('a') : useState('b');
   const [password, setPassword] = useState('a');
 
-   // Aluno
-  // const [username, setUsername] = useState('geison.machado@gennera.com.br');
-  // const [password, setPassword] = useState('12345678');
-
-  // Professor
-  // const [username, setUsername] = useState('');
-  // const [password, setPassword] = useState('');
 
   const { signIn } = useAuthContext();
 

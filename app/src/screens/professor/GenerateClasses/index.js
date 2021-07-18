@@ -25,6 +25,7 @@ export default function GenerateClasses({ navigation }) {
     const [endDate, setEndDate] = useState(new Date());
     const [showStartDate, setShowStartDate] = useState(false);
     const [showEndDate, setShowEndDate] = useState(false);
+    const [vacancies, setVacancies] = useState(4);
     let { width } = Dimensions.get('window')
 
     useEffect(() => {
@@ -57,11 +58,11 @@ export default function GenerateClasses({ navigation }) {
     };
 
     const generateClasses = async () => {
-        await api.fit.classes.generateClasses(idSelectedTimetable, startDate, endDate);
+        await api.fit.classes.generateClasses(idSelectedTimetable, startDate, endDate, vacancies);
     };
 
     return (
-        <View style={{flex: 1}}>
+        <View style={{ flex: 1 }}>
 
             <Page
                 type="static"
@@ -111,12 +112,17 @@ export default function GenerateClasses({ navigation }) {
                             />
                         )}
                     </View>
-                    <View style={{ borderColor: system.separator.opaque, borderTopWidth: 0 }}>
-                        <Text style={[{ color: 'black', flex: 1 }]} numberOfLines={1}>Período</Text>
+                    <View style={{marginTop: 20}}>
+                        <TextInput
+                            style={styles.numberInput}
+                            onChangeText={setVacancies}
+                            value={vacancies.toString()}
+                            keyboardType="numeric"
+                        />
                     </View>
                     <Button style={{ marginTop: 20 }} title={'Gerar'} onPress={() => generateClasses()} />
                 </View>
-              
+
             </Page>
         </View>
     );
@@ -130,6 +136,11 @@ const styles = StyleSheet.create({
         height: 40,
         justifyContent: 'center',
         alignItems: 'center'
+    },
+    numberInput: {
+        borderWidth: 1,
+        textAlign: 'right',
+        fontSize: 16
     }
 });
 

@@ -5,30 +5,6 @@ function buildQueryString(filters) {
 }
 
 const api = {
-  gennera: {
-    login: (username, password) => backstage.post('/auth/login', { username, password }),
-    session: () => classroom.get('/auth/session', {}),
-    customers: (idUser, userRole) => classroom.get(`/users/${idUser}/customers${buildQueryString({userRole})}`, {}),
-    roles: (idUser) => classroom.get(`/users/${idUser}/roles`, {}),
-    changeCustomer: (idCustomer) => classroom.post('/auth/changeCustomer', { idCustomer }),
-    profileImage: (username) => backstage.get(`/public/users/photo?username=${username}`, {}),
-  },
-  classroom: {
-    institutions: {
-      list: () => classroom.get(`/institutions`, {}),
-      diaries: {
-        list: (idInstitution) => classroom.get(`/institutions/${idInstitution}/diaries`, {}),
-      },
-      periods: {
-        list: (idInstitution, idAcademicCalendar) => classroom.get(`/institutions/${idInstitution}/periods?idAcademicCalendar=${idAcademicCalendar}`)
-      }
-    },
-    users: {
-      enrollments: {
-        list: (idUser) => classroom.get(`/users/${idUser}/enrollments`, {})
-      }
-    }
-  },
   fit: {
     timetables: {
       save: (timetable) => fitAxios.post(`/timetables`, timetable),
@@ -41,7 +17,8 @@ const api = {
       }
     },
     classes: {
-        generateClasses: (idTimetable, startDate, endDate) => fitAxios.post(`/classes/generateClasses`, { idTimetable, startDate, endDate }),
+        generateClasses: (idTimetable, startDate, endDate, vacancies) => fitAxios.post(`/classes/generateClasses`, { idTimetable, startDate, endDate, vacancies }),
+        confirmAttendance: (idClass, idUser) => fitAxios.post(`/classes/${idClass}/confirmAttendance`, { idUser}),
         list: (date) => fitAxios.get(`classes?date=${date}`, {}),
         unlock: (date) => fitAxios.post(`classes/unlock?date=${date}`, {}),
         lock: (date) => fitAxios.post(`classes/lock?date=${date}`, {}),

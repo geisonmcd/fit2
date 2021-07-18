@@ -29,6 +29,14 @@ create table fit.class (
   name text,
   start_time timestamp with time zone,
   end_time timestamp with time zone,
+  vacancies integer not null,
   locked boolean default true
 );
 
+create table fit.user_class (
+  id_user integer not null,
+  id_class integer not null,
+  primary key (id_class, id_user),
+  foreign key (id_user) references fit.user (id_user),
+  foreign key (id_class) references fit.class (id_class)
+);
