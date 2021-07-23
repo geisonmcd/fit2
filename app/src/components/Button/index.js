@@ -17,7 +17,7 @@ export default function Button({ style, title, textStyle, onPress, requestFeedba
   }
   
   return (
-    <Pressable style={[styles.button, style]} disabled={requestFeedback && isLoading} onPress={() => onPressEvent()}>
+    <Pressable android_ripple={{color: 'blue'}} style={[styles.button, style]} disabled={requestFeedback && isLoading} onPress={() => onPressEvent()}>
       {isLoading ? (
         <ActivityIndicator size="small" color="#FFF" />
       ) : (

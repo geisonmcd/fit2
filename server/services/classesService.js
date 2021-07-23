@@ -22,24 +22,28 @@ const generateClasses = async function (idTimetable, startDateString, endDateStr
 
 const getClasses = async function () {
     return database.query("select * from fit.class")
-}
+};
 
 const getClassesByDate = async function (date) {
     return database.query(`select * from fit.class where start_time::date = $1`, [moment(date).format('yyyy-MM-DD')])
-}
+};
 
 const lock = async function (date) {
     return database.none(`update fit.class set locked = true where start_time::date = $1`, [moment(date).format('yyyy-MM-DD')])
-}
+};
 
 const unlock = async function (date) {
     return database.none(`update fit.class set locked = false where start_time::date = $1`, [moment(date).format('yyyy-MM-DD')])
-}
+};
 
 const confirmAttendance = async function (idClass, idUser) {
     await database.none(`insert into fit.user_class (id_user, id_class) values ($1, $2)`, [idUser, idClass]);
-    return await database.query(`select * from fit.user_class join fit.user using (id_user) where id_class = $1`, [idClass])
-}
+    return getUsersByIdClass(idClass);
+};
+
+const getUsersByIdClass = async function (idClass) {
+    return database.query(`select * from fit.user_class join fit.user using (id_user) where id_class = $1`, [idClass])
+};
 
 module.exports = {
     generateClasses,
@@ -47,5 +51,6 @@ module.exports = {
     getClassesByDate,
     lock,
     unlock,
-    confirmAttendance
+    confirmAttendance,
+    getUsersByIdClass
 };

@@ -69,34 +69,18 @@ export default function Picker({ name, placeholder, placeholderTextColor, list, 
       <RNPickerSelect
         placeholder={{label: placeholder, value: null, key: null}}
         items={list}
-        // items={items}
-
-        // itemKey={value}
         value={value}
 
-        // itemKey={selected}
-        // value={selected}
-
-        // value={Platform.OS === "ios"
-        //   ? value != null ? value : null
-        //   : undefined
-        // }
-        // itemKey={Platform.OS === "android"
-        //   ? value != null ? value : null
-        //   : undefined
-        // }
         useNativeAndroidPickerStyle={false}
 
         disabled={disabled}
         style={style}
         onValueChange={(newValue, index) => {
           if (newValue !== value) {
-            // console.log(`\n[PICKER - ${name}] onValueChange()`, '\nfrom:', value, '\nto:', newValue, '\nindex:', index);
             setValue(newValue);
             onChange(newValue);
           }
         }}
-        // onValueChange={onChange}
         doneText={doneText}
       />
     </View>

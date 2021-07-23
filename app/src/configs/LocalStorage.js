@@ -22,7 +22,7 @@ async function get(key) {
   try {
     return JSON.parse(await AsyncStorage.getItem(`${PREFIX}:${key}`));
   } catch (e) {
-    console.log('[LocalStorage] Error on GET', e);
+    console.error('[LocalStorage] Error on GET', e);
   }
 }
 
@@ -31,7 +31,7 @@ async function getMany(keys) {
     const array = await AsyncStorage.multiGet(keys.map(key => `${PREFIX}:${key}`));
     return convertArrayToObjectProperties(array);
   } catch (e) {
-    console.log('[LocalStorage] Error on GET MANY', e);
+    console.error('[LocalStorage] Error on GET MANY', e);
   }
 }
 
@@ -39,7 +39,7 @@ async function set(key, value) {
   try {
     await AsyncStorage.setItem(`${PREFIX}:${key}`, value ? JSON.stringify(value) : '');
   } catch (e) {
-    console.log('[LocalStorage] Error on SET', e);
+    console.error('[LocalStorage] Error on SET', e);
   }
 }
 
@@ -47,7 +47,7 @@ async function setMany(object) {
   try {
     await AsyncStorage.multiSet(convertObjectPropertiesToArray(object));
   } catch (e) {
-    console.log('[LocalStorage] Error on SET MANY', e);
+    console.error('[LocalStorage] Error on SET MANY', e);
   }
 }
 
@@ -55,7 +55,7 @@ async function remove(key) {
   try {
     await AsyncStorage.removeItem(`${PREFIX}:${key}`);
   } catch (e) {
-    console.log('[LocalStorage] Error on REMOVE', e);
+    console.error('[LocalStorage] Error on REMOVE', e);
   }
 }
 
@@ -63,7 +63,7 @@ async function removeMany(keys) {
   try {
     await AsyncStorage.multiRemove(keys.map(key => `${PREFIX}:${key}`));
   } catch (e) {
-    console.log('[LocalStorage] Error on REMOVE MANY', e);
+    console.error('[LocalStorage] Error on REMOVE MANY', e);
   }
 }
 
@@ -71,7 +71,7 @@ async function clear() {
   try {
     await AsyncStorage.clear();
   } catch (e) {
-    console.log('[LocalStorage] Error on CLEAR', e);
+    console.error('[LocalStorage] Error on CLEAR', e);
   }
 }
 

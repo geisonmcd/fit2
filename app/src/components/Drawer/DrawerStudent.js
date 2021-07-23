@@ -80,26 +80,6 @@ export default function DrawerStudent({ state, navigation, descriptors, progress
     }
   }, [idEnrollment, idPeriod, originalEnrollments]);
 
-  // useEffect(() => {
-  //   function getActivePeriod(periods) {
-  //     const now = moment();
-  //     if (now.isBefore(moment(periods[0].value.startDate))) {
-  //       return periods[0];
-  //     }
-  //     if (now.isAfter(moment(periods[periods.length - 1].value.endDate))) {
-  //       return periods[periods.length - 1];
-  //     }
-  //     return periods.find(period => now.isBetween(moment(period.value.startDate), moment(period.value.endDate))) || periods[periods.length - 1];
-  //   }
-  //   if (periods.length) {
-  //     if (!idPeriod) {
-  //       const selected = getActivePeriod(periods);
-  //       console.log('Não tem período selecionado.', selected);
-  //       // onChangePeriodHandler(selected);
-  //     }
-  //   }
-  // }, [periods]);
-
   async function onChangeEnrollmentHandler(newValue) {
     setPeriods([]);
     const selected = originalEnrollments.find(e => e.idEnrollment === newValue);

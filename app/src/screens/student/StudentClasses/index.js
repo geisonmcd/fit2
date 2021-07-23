@@ -44,13 +44,13 @@ export default function StudentClasses({ navigation }) {
     }, [date]);
 
     const renderItem = ({ item }) => (
-        <Pressable style={[styles.item, {backgroundColor: item.locked ? '#f9c2ff' : '#639CBF'}]}
+        <Pressable style={[styles.item, {backgroundColor: '#639CBF'}]}
         onPress={() => navigation.navigate('StudentClass', { clazz: item })}
         >
             <Text style={styles.title}>{item.title}</Text>
             <Text style={styles.title}>{item.summary}</Text>
             <Text style={[styles.title]}>{moment(item.start).format('hh:mm') + ' - ' + moment(item.end).format('hh:mm')}</Text>
-            <Text style={[styles.title]}>{item.vacancies}</Text>
+            <Text style={[styles.title]}>{item.vacancies} vagas</Text>
         </Pressable>
     );
 
@@ -68,16 +68,6 @@ export default function StudentClasses({ navigation }) {
         setDate(new Date(b));
     }
 
-    const unlockClasses = async () => {
-        await api.fit.classes.unlock(date);
-        getClasses();
-    }
-   
-    const lockClasses = async () => {
-        await api.fit.classes.lock(date);
-        getClasses();
-    }
-
     return (
         <View style={{ flex: 1 }}>
             <View style={{ backgroundColor: '#eeee', flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center' }}>
@@ -89,7 +79,7 @@ export default function StudentClasses({ navigation }) {
                 data={events}
                 renderItem={renderItem}
             />
-            <View style={{ flexDirection: 'row', justifyContent: 'space-around', marginBottom: 20}}>
+            <View style={{ flexDirection: 'row', justifyContent: 'space-around', marginBottom: 20 }}>
                 {/* <Button style={{ height: 60, backgroundColor: '#f9c2ff' }} title={'Trancar Aulas'} onPress={() => lockClasses()} />
                 <Button style={{ height: 60 }} title={'Liberar Aulas'} onPress={() => unlockClasses()} /> */}
             </View>
