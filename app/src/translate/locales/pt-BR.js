@@ -40,41 +40,6 @@ export default {
   'GenerateClasses': 'Gerar Aulas',
   'Classes': 'Aulas',
   'Timetables': 'Quadros de Horário',
+  'StudentClasses': 'Aulas',
 
-
-
-  'There\'s no diary': 'Nenhum diário',
-
-
-
-
-
-  // "There's no notifications for this user": "Não há notificações para esse usuário.",
-  // "There's no posts in this group": "Não existem publicações neste grupo",
-  // "There's no academic calendar": "Nenhum calendário acadêmico",
-  // "There's no action": "Nenhuma ação",
-  // "There's no enrollment": "Nenhuma matrícula",
-  // "There's no financial": "Nenhum financeiro",
-  // "There's no assignee": "Nenhum responsável",
-  // "There's no attendances": "Nenhuma frequência",
-  // "There's no average": "Nenhuma média",
-  // "There's no contract": "Nenhum contrato",
-  // "There's no diary": "Nenhum diário de classe",
-  // "There's no exam": "Nenhum exame",
-  // "The quiz still isn't finished being created by the teacher": "A edição do quiz ainda não foi concluída pelo professor",
-  // "The teacher still hasn't finished grading the quiz": "O quiz ainda não foi corrigido pelo professor",
-  // "The teacher still hasn't finished grading the activity": "A atividade ainda não foi corrigida pelo professor",
-  // "There's no free assessment": "Nenhum parecer descritivo",
-  // "There's no grades": "Nenhuma nota",
-  // "There's no incident action": "Nenhuma ação de ocorrência",
-  // "There's no incident type": "Nenhum tipo de ocorrência",
-  // "There's no incident": "Nenhuma ocorrência",
-  // "There's no institution": "Nenhuma instituição",
-  // "There's no lesson": "Nenhuma aula",
-  // "There's no metadata": "Nenhum dado adicional",
-  // "There's no option": "Nenhuma opção",
-  // "There's no resource": "Nenhum recurso",
-  // "There's no section": "Nenhuma seção",
-  // "There's no student": "Nenhum aluno",
-  // "There's no subsection": "Nenhuma subseção",
 }

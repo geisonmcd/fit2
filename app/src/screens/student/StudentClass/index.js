@@ -30,16 +30,11 @@ export default function StudentClass({ navigation }) {
 
     const getUsers = async () => {
         let users = await api.fit.classes.users.list(clazz.idClass);
-        console.log('olha o que tá vindo aqui')
-        console.log(users.data)
         setClassUsers(users.data)
     };
 
     const confirmAttendance = async () => {
         let users = await api.fit.classes.confirmAttendance(clazz.idClass, session.idUser);
-        console.log('#####################################################################')
-        console.log('olha o users.data aí')
-        console.log(users.data)
         setClassUsers(users.data)
     };
 
@@ -52,20 +47,26 @@ export default function StudentClass({ navigation }) {
                     <Text style={[styles.title]}>{moment(clazz.start).format('hh:mm') + ' - ' + moment(clazz.end).format('hh:mm')}</Text>
                 </View>
             </View>
-            <View style={{ justifyContent: 'center', alignItems: 'center', backgroundColor: 'pink', height: 150}}>
+            <View style={{  backgroundColor: 'pink', paddingVertical: 20}}>
                 {classUsers && classUsers.map((classUser) => {
                     return (
-                        <View key={classUser.idUser} style={{flexDirection: 'row', alignItems: 'center'}}>
+                        <View key={classUser.idUser} style={{flexDirection: 'row', alignItems: 'center', paddingBottom: 10}}>
                             <UserAvatar style={{ marginHorizontal: 10 }} hash={null} size={35} />
                             <Text >{classUser.name}</Text>
                         </View>
                     )
                 })}
+                {[...Array(clazz.vacancies - classUsers.length)].map((x, i) =>
+                    <View key={i} style={{flexDirection: 'row', alignItems: 'center', paddingBottom:10}}>
+                        <UserAvatar style={{ marginHorizontal: 10 }} hash={null} size={35} />
+                        <Text >Disponível</Text>
+                    </View>
+                )}
             </View>
+            {/* TODO: desconfirmar presença se estiver confirmada */}
             <Button style={{ }} title={'Confirmar Presença'} onPress={() => confirmAttendance()} />
         </View>
     );
-
 }
 const styles = StyleSheet.create({
     datePressable: {

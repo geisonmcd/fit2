@@ -25,7 +25,15 @@ const getClasses = async function () {
 };
 
 const getClassesByDate = async function (date) {
-    return database.query(`select * from fit.class where start_time::date = $1`, [moment(date).format('yyyy-MM-DD')])
+    return database.query(`
+        select 
+            c.*, 
+            array_agg(row_to_json(uc.*))  filter (where uc.* is not null) as users
+            from fit.class c
+            full outer join fit.user_class uc using (id_class)
+            where start_time::date = $1
+            group by c.id_class`,
+        [moment(date).format('yyyy-MM-DD')]);
 };
 
 const lock = async function (date) {

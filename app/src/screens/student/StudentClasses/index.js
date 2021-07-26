@@ -24,18 +24,25 @@ export default function StudentClasses({ navigation }) {
 
     let getClasses = async function () {
         let classes = await api.fit.classes.list(date);
-        classes = classes.data.map(function (clazz) {
-            return {
-                key: clazz.idClass.toString(),
-                idClass: clazz.idClass,
-                start: clazz.startTime,
-                end: clazz.endTime,
-                locked: clazz.locked,
-                title: 'jujuba',
-                summary: 'já pensou filhão',
-                vacancies: clazz.vacancies
+        classes = classes.data.reduce(function (unlockedClasses, clazz) {
+            console.log(clazz.vacancies, clazz.users)
+            if (!clazz.locked) {
+                unlockedClasses.push({
+                    key: clazz.idClass.toString(),
+                    idClass: clazz.idClass,
+                    start: clazz.startTime,
+                    end: clazz.endTime,
+                    locked: clazz.locked,
+                    title: 'jujuba',
+                    summary: 'já pensou filhão',
+                    vacancies: clazz.vacancies,
+                    availableSpots: clazz.vacancies - (clazz.users ? clazz.users.length : 0 )
+                })
             }
-        })
+            return unlockedClasses;
+        }, [])
+        console.log('asdfçlajsdçflkajsdfçlaskjdfçalskjfaçsldkfjasçldkfjasçldfkjasdçflkj')
+        console.log(classes)
         setEvents(classes);
     }
 
@@ -45,12 +52,12 @@ export default function StudentClasses({ navigation }) {
 
     const renderItem = ({ item }) => (
         <Pressable style={[styles.item, {backgroundColor: '#639CBF'}]}
-        onPress={() => navigation.navigate('StudentClass', { clazz: item })}
+            onPress={() => navigation.navigate('StudentClass', { clazz: item })}
         >
             <Text style={styles.title}>{item.title}</Text>
             <Text style={styles.title}>{item.summary}</Text>
             <Text style={[styles.title]}>{moment(item.start).format('hh:mm') + ' - ' + moment(item.end).format('hh:mm')}</Text>
-            <Text style={[styles.title]}>{item.vacancies} vagas</Text>
+            <Text style={[styles.title]}>{item.availableSpots} vagas</Text>
         </Pressable>
     );
 

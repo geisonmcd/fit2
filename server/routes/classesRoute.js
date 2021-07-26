@@ -30,7 +30,9 @@ router.post('/unlock', async function (req, res) {
 
 router.get('/', async function (req, res) {
     const date = new Date(req.query.date);
+    console.log('é serio mesmo')
     const classes = await classesService.getClassesByDate(date);
+    console.log(classes)
     res.json(classes);
 });
 
