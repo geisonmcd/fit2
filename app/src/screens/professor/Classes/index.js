@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { FlatList, View, Pressable, Modal, Text, StyleSheet, TextInput, Dimensions } from 'react-native';
-import { useNavigation, useTheme } from '@react-navigation/native';
+import { useNavigation, useTheme, useIsFocused } from '@react-navigation/native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { translate } from '../../../translate';
 import { Button, Picker, Page } from '../../../components';
@@ -13,8 +13,6 @@ import { Calendar, CalendarList, Agenda } from 'react-native-calendars';
 
 MaterialIcons.loadFont();
 
-
-//Não tá carregando as aulas novas ao entrar na tela
 export default function Classes({ navigation }) {
 
     const { } = useAuthContext();
@@ -23,6 +21,8 @@ export default function Classes({ navigation }) {
     let { width } = Dimensions.get('window');
     let [events, setEvents] = useState([]);
     let [date, setDate] = useState(new Date());
+    const isFocused = useIsFocused();
+
 
     let getClasses = async function () {
         let classes = await api.fit.classes.list(date);
@@ -41,7 +41,7 @@ export default function Classes({ navigation }) {
 
     useEffect(() => {
         getClasses();
-    }, [date]);
+    }, [date, isFocused]);
 
     const renderItem = ({ item }) => (
         <View style={[styles.item, {backgroundColor: item.locked ? '#f9c2ff' : '#639CBF'}]}>

@@ -41,8 +41,6 @@ export default function StudentClasses({ navigation }) {
             }
             return unlockedClasses;
         }, [])
-        console.log('asdfçlajsdçflkajsdfçlaskjdfçalskjfaçsldkfjasçldkfjasçldfkjasdçflkj')
-        console.log(classes)
         setEvents(classes);
     }
 
