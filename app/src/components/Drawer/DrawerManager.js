@@ -24,6 +24,7 @@ export default function DrawerManager({ state, navigation, descriptors, progress
         'Timetables': 'clock-o',
         'Classes': 'book',
         'GenerateClasses': 'codepen',
+        'AddUsers': 'users',
     };
 
     useEffect(() => {

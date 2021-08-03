@@ -41,5 +41,6 @@ export default {
   'Classes': 'Aulas',
   'Timetables': 'Quadros de Horário',
   'StudentClasses': 'Aulas',
+  'AddUsers': 'Usuários',
 
 }

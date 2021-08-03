@@ -4,7 +4,7 @@ import { useNavigation, useTheme } from '@react-navigation/native';
 import { createStackNavigator, TransitionPresets } from '@react-navigation/stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { Drawer as DrawerContent } from '../components';
-import { Timetables, Timetable, Classes, GenerateClasses, } from '../screens/professor';
+import { Timetables, Timetable, Classes, GenerateClasses, AddUsers } from '../screens/professor';
 // import { Modal } from '../components';
 import { useAuthContext } from '../contexts/AuthContext';
 import { translate } from '../translate';
@@ -90,12 +90,25 @@ function GenerateClassesStack() {
   );
 }
 
+
+function AddUsersStack() {
+  return (
+      <Stack.Navigator initialRouteName="AddUsers" screenOptions={getDefaultScreenOptions()}>
+          <Stack.Screen name="AddUsers" component={AddUsers} options={({ route }) => ({
+              ...getDefaultOptions({ route }),
+              headerLeft: () => <BurgerButton />
+          })} />
+      </Stack.Navigator>
+);
+}
+
 function DrawerMenu() {
   return (
     <Drawer.Navigator initialRouteName="Classes" drawerContent={(props) => <DrawerContent {...props} />}>
       <Drawer.Screen name="Timetables" component={TimetablesStack} />
       <Drawer.Screen name="GenerateClasses" component={GenerateClassesStack} />
       <Drawer.Screen name="Classes" component={ClassesStack} />
+      <Drawer.Screen name="AddUsers" component={AddUsersStack} />
     </Drawer.Navigator>
   );
 }
