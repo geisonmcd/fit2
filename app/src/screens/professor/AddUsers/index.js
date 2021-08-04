@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { FlatList, View, Pressable, ActivityIndicator, Modal, Text, StyleSheet, TextInput, Dimensions } from 'react-native';
+import { FlatList, View, Pressable, ActivityIndicator, Modal, Text, StyleSheet, Dimensions } from 'react-native';
 import { Formik } from 'formik';
 import { useNavigation, useTheme } from '@react-navigation/native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { translate } from '../../../translate';
 import { Page } from '../../../components';
-import { Button, Picker } from '../../../components';
+import { Picker } from '../../../components';
+import { Button, TextInput } from 'react-native-paper';
+
 import api from '../../../services/api';
 import { useAuthContext } from '../../../contexts/AuthContext';
 import { useAppContext } from '../../../contexts/AppContext';
@@ -29,8 +31,13 @@ export default function AddUsers({ navigation }) {
   const [endDate, setEndDate] = useState(new Date());
   const [showStartDate, setShowStartDate] = useState(false);
   const [showEndDate, setShowEndDate] = useState(false);
+  const [name, setName] = useState("");
+  const [a, setA] = useState(true);
+  const [username, setUsername] = useState("");
   const [vacancies, setVacancies] = useState(4);
-  let { width } = Dimensions.get('window')
+  let { width } = Dimensions.get('window');
+  const [text, setText] = React.useState('');
+
 
   useEffect(() => {
     let getTimetables = async function () {
@@ -71,10 +78,9 @@ export default function AddUsers({ navigation }) {
 
   return (
     <View style={{ flex: 1 }}>
-
       <Page
         type="static"
-        title={'Gerar aulas'}
+        title={'Adicionar Aluno'}
         smallTitle={translate('Diaries')}
         noDataIcon="book"
         noDataMessage={translate('There\'s no diary')}
@@ -82,10 +88,31 @@ export default function AddUsers({ navigation }) {
         <View style={{ padding: 10 }}>
           <View style={{ marginTop: 20 }}>
             <TextInput
-              style={styles.numberInput}
-              onChangeText={setVacancies}
-              value={vacancies.toString()}
+              label="Nome"
+              mode="flat"
+              value={name}
+              onChangeText={name => setName(name)}
             />
+          </View>
+          <View style={{ marginTop: 20 }}>
+            <TextInput
+              label="Username"
+              mode="flat"
+              value={username}
+              onChangeText={username => setUsername(username)}
+            />
+          </View>
+          <View style={{ marginTop: 20 }}>
+            <TextInput
+              label="Password"
+              secureTextEntry={a}
+              right={<TextInput.Icon name="eye" onPress={()=> setA(!a)}/>}
+            />
+          </View>
+          <View style={{ marginTop: 20 }}>
+          <Button icon="content-save" mode="contained" onPress={() => console.log('Pressed')}>
+            Salvar
+          </Button>
           </View>
           {isLoading ?
             <ActivityIndicator size="large" color="#00ff00" />

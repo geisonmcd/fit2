@@ -7,6 +7,8 @@ import { AuthContextProvider } from './contexts/AuthContext';
 import { dark, light } from './UI/system';
 import Routes from './routes';
 import { useColorScheme, StatusBar } from 'react-native';
+import { Provider as PaperProvider } from 'react-native-paper';
+
 
 
 export default function App() {
@@ -52,7 +54,10 @@ export default function App() {
     <NavigationContainer theme={ActiveTheme}>
       <AuthContextProvider>
         <AppContextProvider>
-          <Routes />
+            <PaperProvider>
+              <Routes />
+            </PaperProvider>
+
         </AppContextProvider>
       </AuthContextProvider>
     </NavigationContainer>
