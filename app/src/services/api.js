@@ -26,6 +26,9 @@ const api = {
           list: (idClass) => fitAxios.get(`classes/${idClass}/users`, {}),
         }
     },
+    users: {
+      addUser: (user) => fitAxios.post(`/users/`, user),
+    },
     login: (username, password) => fitAxios.post('public/auth/login', { username, password }),
     session: (username) => fitAxios.get(`public/auth/session?username=${username}`, {}),
   },

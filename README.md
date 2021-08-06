@@ -1,4 +1,5 @@
 # fit2
+- Arrumar a tela de confirmação e desconfirmação na visão de aluno
 - Adicionar 1 aula
 - Remover aula
 - Deixar professor confirmar aluno
@@ -10,6 +11,7 @@
 - Colocar o RN Paper no app todo
 - Colocar SplashScreen
 - Colocar o logo no ícone
+- Tela com uma lista com todos os alunos
 
 OK Criar tela de Quadros de Horário
 OK gerando as aulas

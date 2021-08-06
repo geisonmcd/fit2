@@ -22,6 +22,7 @@ app.options('*', function (req, res, next) {
 
 app.use('/timetables', require('../routes/timetablesRoute'));
 app.use('/classes', require('../routes/classesRoute'));
+app.use('/users', require('../routes/usersRoute'));
 app.use('/public', require('../routes/publicRoute'));
 
 

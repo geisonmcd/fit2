@@ -37,7 +37,6 @@ router.get('/', async function (req, res) {
 });
 
 router.get('/:idClass/users', async function (req, res) {
-    console.log('11111111111111111111111111111111111111111111111111111')
     let idClass = req.params.idClass;
     const classes = await classesService.getUsersByIdClass(idClass);
     res.json(classes);

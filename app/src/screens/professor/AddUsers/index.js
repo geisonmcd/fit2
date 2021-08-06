@@ -23,56 +23,29 @@ export default function AddUsers({ navigation }) {
 
   const { } = useAuthContext();
   const { } = useAppContext();
-  const { system } = useTheme();
-  const [timetables, setTimetables] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [idSelectedTimetable, setIdSelectedTimetable] = useState([]);
-  const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(new Date());
-  const [showStartDate, setShowStartDate] = useState(false);
-  const [showEndDate, setShowEndDate] = useState(false);
   const [name, setName] = useState("");
-  const [a, setA] = useState(true);
+  const [hide, setHide] = useState(true);
   const [username, setUsername] = useState("");
-  const [vacancies, setVacancies] = useState(4);
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
   let { width } = Dimensions.get('window');
-  const [text, setText] = React.useState('');
-
 
   useEffect(() => {
-    let getTimetables = async function () {
-      let timetables = await api.fit.timetables.list();
-      timetables = timetables.data.map(item => ({
-        key: item.idTimetable,
-        label: item.name,
-        value: item.idTimetable
-      }));
-      setTimetables(timetables)
-    }
-    getTimetables();
+  
   }, []);
 
-  const onChangeStartDate = (event, selectedDate) => {
-    if (event.type === "dismissed") {
-      return;
-    }
-    setStartDate(selectedDate);
-    setShowStartDate(false);
-  };
-
-  const onChangeEndDate = (event, selectedDate) => {
-    if (event.type === "dismissed") {
-      return;
-    }
-    setEndDate(selectedDate);
-    setShowEndDate(false);
-  };
-
-  const generateClasses = async () => {
-    setIsLoading(true);
-    api.fit.classes.generateClasses(idSelectedTimetable, startDate, endDate, vacancies).then(() => {
-      setIsLoading(false);
-      Toast.show("Aulas geradas com sucesso!", Toast.LONG);
+  const addClient = async () => {
+    setLoading(true);
+    console.log('1')
+    api.fit.users.addUser({ name, username, password, role: 'client' }).then(() => {
+      Toast.show("Aluno salvo!]", Toast.LONG);
+    }).catch((error) => {
+      Toast.show("Erro ao inserir aluno!]", Toast.LONG);
+    }).finally(() => {
+      setLoading(false);
+      setName("");
+      setUsername("");
+      setPassword("");
     });
   };
 
@@ -105,20 +78,20 @@ export default function AddUsers({ navigation }) {
           <View style={{ marginTop: 20 }}>
             <TextInput
               label="Password"
-              secureTextEntry={a}
-              right={<TextInput.Icon name="eye" onPress={()=> setA(!a)}/>}
+              secureTextEntry={hide}
+              right={<TextInput.Icon name="eye" onPress={()=> setHide(!hide)}/>}
+              value={password}
+              onChangeText={password => setPassword(password)}
             />
           </View>
           <View style={{ marginTop: 20 }}>
-          <Button icon="content-save" mode="contained" onPress={() => console.log('Pressed')}>
-            Salvar
-          </Button>
-          </View>
-          {isLoading ?
+          {loading ?
             <ActivityIndicator size="large" color="#00ff00" />
             :
-            <Button style={{ marginTop: 20 }} title={'Gerar'} onPress={() => generateClasses()} />
-          }
+            <Button icon="content-save" mode="contained" onPress={addClient}>
+              Salvar
+            </Button>          }
+          </View>
         </View>
 
       </Page>
