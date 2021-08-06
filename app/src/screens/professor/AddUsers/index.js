@@ -31,8 +31,9 @@ export default function AddUsers({ navigation }) {
   let { width } = Dimensions.get('window');
 
   useEffect(() => {
-  
   }, []);
+
+
 
   const addClient = async () => {
     setLoading(true);
@@ -79,18 +80,19 @@ export default function AddUsers({ navigation }) {
             <TextInput
               label="Password"
               secureTextEntry={hide}
-              right={<TextInput.Icon name="eye" onPress={()=> setHide(!hide)}/>}
+              right={<TextInput.Icon name="eye" onPress={() => setHide(!hide)} />}
               value={password}
               onChangeText={password => setPassword(password)}
             />
           </View>
           <View style={{ marginTop: 20 }}>
-          {loading ?
-            <ActivityIndicator size="large" color="#00ff00" />
-            :
-            <Button icon="content-save" mode="contained" onPress={addClient}>
-              Salvar
-            </Button>          }
+            {loading ?
+              <ActivityIndicator size="large" color="#00ff00" />
+              :
+              <Button icon="content-save" mode="contained" onPress={addClient}>
+                Salvar
+              </Button>
+            }
           </View>
         </View>
 
